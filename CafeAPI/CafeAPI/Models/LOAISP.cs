@@ -31,6 +31,9 @@ namespace CafeAPI.Models
 
         public int? HANGSX_ID { get; set; }
 
+        [StringLength(20)]
+        public string TRANGTHAI { get; set; }
+
         //public virtual HANGSX HANGSX { get; set; }
 
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
