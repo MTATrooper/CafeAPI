@@ -12,7 +12,7 @@ namespace CafeAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HANGSX()
         {
-            LOAISP = new HashSet<LOAISP>();
+            //LOAISP = new HashSet<LOAISP>();
         }
 
         public int ID { get; set; }
@@ -20,7 +20,7 @@ namespace CafeAPI.Models
         [StringLength(50)]
         public string TEN { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LOAISP> LOAISP { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<LOAISP> LOAISP { get; set; }
     }
 }

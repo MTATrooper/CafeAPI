@@ -12,12 +12,12 @@ namespace CafeAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SANPHAM()
         {
-            BAIBAO = new HashSet<BAIBAO>();
-            BINHLUAN = new HashSet<BINHLUAN>();
-            CHITIETDONHANG = new HashSet<CHITIETDONHANG>();
-            CHITIETNHAPHANG = new HashSet<CHITIETNHAPHANG>();
-            PRICE = new HashSet<PRICE>();
-            THONGKE = new HashSet<THONGKE>();
+            //BAIBAO = new HashSet<BAIBAO>();
+            //BINHLUAN = new HashSet<BINHLUAN>();
+            //CHITIETDONHANG = new HashSet<CHITIETDONHANG>();
+            //CHITIETNHAPHANG = new HashSet<CHITIETNHAPHANG>();
+            //PRICE = new HashSet<PRICE>();
+            //THONGKE = new HashSet<THONGKE>();
         }
 
         public int ID { get; set; }
@@ -34,24 +34,24 @@ namespace CafeAPI.Models
 
         public int? LOAISP_ID { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BAIBAO> BAIBAO { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+       //public virtual ICollection<BAIBAO> BAIBAO { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BINHLUAN> BINHLUAN { get; set; }
+       // [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<BINHLUAN> BINHLUAN { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETDONHANG> CHITIETDONHANG { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<CHITIETDONHANG> CHITIETDONHANG { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETNHAPHANG> CHITIETNHAPHANG { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<CHITIETNHAPHANG> CHITIETNHAPHANG { get; set; }
 
-        public virtual LOAISP LOAISP { get; set; }
+        //public virtual LOAISP LOAISP { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRICE> PRICE { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<PRICE> PRICE { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THONGKE> THONGKE { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<THONGKE> THONGKE { get; set; }
     }
 }

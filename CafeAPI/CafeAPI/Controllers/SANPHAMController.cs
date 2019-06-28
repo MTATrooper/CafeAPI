@@ -9,25 +9,36 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CafeAPI.DAO;
 using CafeAPI.Models;
 
 namespace CafeAPI.Controllers
 {
+    [RoutePrefix("api/SANPHAM")]
     public class SANPHAMController : ApiController
     {
+        private SANPHAM_DAO spDAO = new SANPHAM_DAO();
         private CafeDbContext db = new CafeDbContext();
 
         // GET: api/SANPHAM
-        public IQueryable<SANPHAM> GetSANPHAM()
+        public List<SANPHAM> GetSANPHAM()
         {
-            return db.SANPHAM;
+            return spDAO.GetSANPHAM();
         }
 
+        // GET: api/SANPHAM/LoaiSP?id={id}
+        [HttpGet]
+        [Route("LoaiSP")]
+        public IHttpActionResult GetSANPHAMbyLSP(int id)
+        {
+            List<SANPHAM> lst = spDAO.GetSANPHAMByLSP(id);
+            return Ok(lst);
+        }
         // GET: api/SANPHAM/5
         [ResponseType(typeof(SANPHAM))]
-        public async Task<IHttpActionResult> GetSANPHAM(int id)
+        public IHttpActionResult GetSANPHAM(int id)
         {
-            SANPHAM sANPHAM = await db.SANPHAM.FindAsync(id);
+            SANPHAM sANPHAM = spDAO.GetSANPHAMbyId(id);
             if (sANPHAM == null)
             {
                 return NotFound();
@@ -38,34 +49,20 @@ namespace CafeAPI.Controllers
 
         // PUT: api/SANPHAM/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutSANPHAM(SANPHAM sANPHAM)
+        public IHttpActionResult PutSANPHAM(SANPHAM sANPHAM)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            //if (id != sANPHAM.ID)
-            //{
-            //    return BadRequest();
-            //}
-
-            db.Entry(sANPHAM).State = EntityState.Modified;
-
             try
             {
-                await db.SaveChangesAsync();
+                spDAO.UpdateSANPHAM(sANPHAM);
             }
             catch (DbUpdateConcurrencyException)
             {
-                //if (!SANPHAMExists(id))
-                //{
-                //    return NotFound();
-                //}
-                //else
-                //{
-                //    throw;
-                //}
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -73,31 +70,29 @@ namespace CafeAPI.Controllers
 
         // POST: api/SANPHAM
         [ResponseType(typeof(SANPHAM))]
-        public async Task<IHttpActionResult> PostSANPHAM(SANPHAM sANPHAM)
+        public IHttpActionResult PostSANPHAM(SANPHAM sANPHAM)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.SANPHAM.Add(sANPHAM);
-            await db.SaveChangesAsync();
+            spDAO.InsertSANPHAM(sANPHAM);
 
             return CreatedAtRoute("DefaultApi", new { id = sANPHAM.ID }, sANPHAM);
         }
 
         // DELETE: api/SANPHAM/5
         [ResponseType(typeof(SANPHAM))]
-        public async Task<IHttpActionResult> DeleteSANPHAM(int id)
+        public IHttpActionResult DeleteSANPHAM(int id)
         {
-            SANPHAM sANPHAM = await db.SANPHAM.FindAsync(id);
+            SANPHAM sANPHAM = spDAO.GetSANPHAMbyId(id);
             if (sANPHAM == null)
             {
                 return NotFound();
             }
 
-            db.SANPHAM.Remove(sANPHAM);
-            await db.SaveChangesAsync();
+            spDAO.DeleteSANPHAM(sANPHAM);
 
             return Ok(sANPHAM);
         }
@@ -114,6 +109,17 @@ namespace CafeAPI.Controllers
         private bool SANPHAMExists(int id)
         {
             return db.SANPHAM.Count(e => e.ID == id) > 0;
+        }
+
+        // GET: api/SANPHAM/Price?id={id}
+        [HttpGet]
+        [Route("Price")]
+        [ResponseType(typeof(int))]
+        public IHttpActionResult getPrice(int id)
+        {
+            DateTime now = DateTime.Now;
+            PRICE price = spDAO.GetPriceBySanPham(id);
+            return Ok(price.GIABAN);
         }
     }
 }

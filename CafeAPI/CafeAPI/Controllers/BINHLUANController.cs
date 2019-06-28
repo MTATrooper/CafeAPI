@@ -20,6 +20,7 @@ namespace CafeAPI.Controllers
         // GET: api/BINHLUAN
         public IQueryable<BINHLUAN> GetBINHLUAN()
         {
+            //var bl = from d in db.BINHLUAN select d
             return db.BINHLUAN;
         }
 

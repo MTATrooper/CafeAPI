@@ -85,10 +85,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2019 14:53:01</publishTime>
     </File>
     <File Include="bin/CafeAPI.dll">
-      <publishTime>06/26/2019 18:37:46</publishTime>
+      <publishTime>06/28/2019 20:58:20</publishTime>
     </File>
     <File Include="bin/CafeAPI.pdb">
-      <publishTime>06/26/2019 18:37:46</publishTime>
+      <publishTime>06/28/2019 20:58:20</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/08/2018 02:03:48</publishTime>
@@ -350,6 +350,150 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Global.asax">
       <publishTime>06/26/2019 14:52:43</publishTime>
+    </File>
+    <File Include="Resources/Image/0.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/1.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/10.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/11.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/12.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/13.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/14.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/15.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/16.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/17.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/18.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/19.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/2.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/20.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/21.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/22.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/23.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/24.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/25.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/26.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/27.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/28.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/29.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/3.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/30.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/31.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/32.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/33.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/34.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/35.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/36.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/37.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/38.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/39.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/4.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/40.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/41.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/42.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/43.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/44.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/45.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/46.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/47.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/5.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/6.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/7.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/8.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
+    </File>
+    <File Include="Resources/Image/9.jpg">
+      <publishTime>06/27/2019 08:22:16</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>06/26/2019 14:52:47</publishTime>

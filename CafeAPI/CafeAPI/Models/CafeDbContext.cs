@@ -30,101 +30,101 @@ namespace CafeAPI.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CHITIETDONHANG>()
-                .HasMany(e => e.XUATHANG)
-                .WithOptional(e => e.CHITIETDONHANG)
-                .HasForeignKey(e => e.CHITIETDH_ID);
+            //modelBuilder.Entity<CHITIETDONHANG>()
+            //    .HasMany(e => e.XUATHANG)
+            //    .WithOptional(e => e.CHITIETDONHANG)
+            //    .HasForeignKey(e => e.CHITIETDH_ID);
 
-            modelBuilder.Entity<DONHANG>()
-                .Property(e => e.SDT)
-                .IsUnicode(false);
+            //modelBuilder.Entity<DONHANG>()
+            //    .Property(e => e.SDT)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<DONHANG>()
-                .HasMany(e => e.CHITIETDONHANG)
-                .WithOptional(e => e.DONHANG)
-                .HasForeignKey(e => e.DONHANG_ID);
+            //modelBuilder.Entity<DONHANG>()
+            //    .HasMany(e => e.CHITIETDONHANG)
+            //    .WithOptional(e => e.DONHANG)
+            //    .HasForeignKey(e => e.DONHANG_ID);
 
-            modelBuilder.Entity<HANGSX>()
-                .HasMany(e => e.LOAISP)
-                .WithOptional(e => e.HANGSX)
-                .HasForeignKey(e => e.HANGSX_ID);
+            ////modelBuilder.Entity<HANGSX>()
+            ////    .HasMany(e => e.LOAISP)
+            ////    .WithOptional(e => e.HANGSX)
+            ////    .HasForeignKey(e => e.HANGSX_ID);
 
-            modelBuilder.Entity<LOAISP>()
-                .HasMany(e => e.SANPHAM)
-                .WithOptional(e => e.LOAISP)
-                .HasForeignKey(e => e.LOAISP_ID);
+            ////modelBuilder.Entity<LOAISP>()
+            ////    .HasMany(e => e.SANPHAM)
+            ////    .WithOptional(e => e.LOAISP)
+            ////    .HasForeignKey(e => e.LOAISP_ID);
 
-            modelBuilder.Entity<NGUOIDUNG>()
-                .Property(e => e.TENDANGNHAP)
-                .IsUnicode(false);
+            //modelBuilder.Entity<NGUOIDUNG>()
+            //    .Property(e => e.TENDANGNHAP)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<NGUOIDUNG>()
-                .Property(e => e.SDT)
-                .IsUnicode(false);
+            //modelBuilder.Entity<NGUOIDUNG>()
+            //    .Property(e => e.SDT)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<NGUOIDUNG>()
-                .HasMany(e => e.BINHLUAN)
-                .WithOptional(e => e.NGUOIDUNG)
-                .HasForeignKey(e => e.KHACHHANG_ID);
+            //modelBuilder.Entity<NGUOIDUNG>()
+            //    .HasMany(e => e.BINHLUAN)
+            //    .WithOptional(e => e.NGUOIDUNG)
+            //    .HasForeignKey(e => e.KHACHHANG_ID);
 
-            modelBuilder.Entity<NGUOIDUNG>()
-                .HasMany(e => e.DONHANG)
-                .WithOptional(e => e.NGUOIDUNG)
-                .HasForeignKey(e => e.KHACHHANG_ID);
+            //modelBuilder.Entity<NGUOIDUNG>()
+            //    .HasMany(e => e.DONHANG)
+            //    .WithOptional(e => e.NGUOIDUNG)
+            //    .HasForeignKey(e => e.KHACHHANG_ID);
 
-            modelBuilder.Entity<NHACUNGCAP>()
-                .Property(e => e.SDT)
-                .IsUnicode(false);
+            //modelBuilder.Entity<NHACUNGCAP>()
+            //    .Property(e => e.SDT)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<NHACUNGCAP>()
-                .HasMany(e => e.NHAPHANG)
-                .WithOptional(e => e.NHACUNGCAP)
-                .HasForeignKey(e => e.NHACC_ID);
+            //modelBuilder.Entity<NHACUNGCAP>()
+            //    .HasMany(e => e.NHAPHANG)
+            //    .WithOptional(e => e.NHACUNGCAP)
+            //    .HasForeignKey(e => e.NHACC_ID);
 
-            modelBuilder.Entity<NHAPHANG>()
-                .HasMany(e => e.CHITIETNHAPHANG)
-                .WithOptional(e => e.NHAPHANG)
-                .HasForeignKey(e => e.NHAPHANG_ID);
+            //modelBuilder.Entity<NHAPHANG>()
+            //    .HasMany(e => e.CHITIETNHAPHANG)
+            //    .WithOptional(e => e.NHAPHANG)
+            //    .HasForeignKey(e => e.NHAPHANG_ID);
 
-            modelBuilder.Entity<NHAPHANG>()
-                .HasMany(e => e.XUATHANG)
-                .WithOptional(e => e.NHAPHANG)
-                .HasForeignKey(e => e.NHAPHANG_ID);
+            //modelBuilder.Entity<NHAPHANG>()
+            //    .HasMany(e => e.XUATHANG)
+            //    .WithOptional(e => e.NHAPHANG)
+            //    .HasForeignKey(e => e.NHAPHANG_ID);
 
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.BAIBAO)
-                .WithOptional(e => e.SANPHAM)
-                .HasForeignKey(e => e.SANPHAM_ID);
+            ////modelBuilder.Entity<SANPHAM>()
+            ////    .HasMany(e => e.BAIBAO)
+            ////    .WithOptional(e => e.SANPHAM)
+            ////    .HasForeignKey(e => e.SANPHAM_ID);
 
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.BINHLUAN)
-                .WithOptional(e => e.SANPHAM)
-                .HasForeignKey(e => e.SANPHAM_ID);
+            //modelBuilder.Entity<SANPHAM>()
+            //    .HasMany(e => e.BINHLUAN)
+            //    .WithOptional(e => e.SANPHAM)
+            //    .HasForeignKey(e => e.SANPHAM_ID);
 
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.CHITIETDONHANG)
-                .WithOptional(e => e.SANPHAM)
-                .HasForeignKey(e => e.SANPHAM_ID);
+            //modelBuilder.Entity<SANPHAM>()
+            //    .HasMany(e => e.CHITIETDONHANG)
+            //    .WithOptional(e => e.SANPHAM)
+            //    .HasForeignKey(e => e.SANPHAM_ID);
 
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.CHITIETNHAPHANG)
-                .WithOptional(e => e.SANPHAM)
-                .HasForeignKey(e => e.SANPHAM_ID);
+            //modelBuilder.Entity<SANPHAM>()
+            //    .HasMany(e => e.CHITIETNHAPHANG)
+            //    .WithOptional(e => e.SANPHAM)
+            //    .HasForeignKey(e => e.SANPHAM_ID);
 
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.PRICE)
-                .WithOptional(e => e.SANPHAM)
-                .HasForeignKey(e => e.SANPHAM_ID);
+            //modelBuilder.Entity<SANPHAM>()
+            //    .HasMany(e => e.PRICE)
+            //    .WithOptional(e => e.SANPHAM)
+            //    .HasForeignKey(e => e.SANPHAM_ID);
 
-            modelBuilder.Entity<SANPHAM>()
-                .HasMany(e => e.THONGKE)
-                .WithOptional(e => e.SANPHAM)
-                .HasForeignKey(e => e.SANPHAM_ID);
+            //modelBuilder.Entity<SANPHAM>()
+            //    .HasMany(e => e.THONGKE)
+            //    .WithOptional(e => e.SANPHAM)
+            //    .HasForeignKey(e => e.SANPHAM_ID);
 
-            modelBuilder.Entity<TRANGTHAIDH>()
-                .HasMany(e => e.DONHANG)
-                .WithOptional(e => e.TRANGTHAIDH)
-                .HasForeignKey(e => e.TRANGTHAI_ID);
+            //modelBuilder.Entity<TRANGTHAIDH>()
+            //    .HasMany(e => e.DONHANG)
+            //    .WithOptional(e => e.TRANGTHAIDH)
+            //    .HasForeignKey(e => e.TRANGTHAI_ID);
         }
     }
 }

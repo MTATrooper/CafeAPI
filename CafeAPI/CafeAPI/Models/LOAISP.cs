@@ -12,7 +12,7 @@ namespace CafeAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LOAISP()
         {
-            SANPHAM = new HashSet<SANPHAM>();
+            //SANPHAM = new HashSet<SANPHAM>();
         }
 
         public int ID { get; set; }
@@ -31,9 +31,9 @@ namespace CafeAPI.Models
 
         public int? HANGSX_ID { get; set; }
 
-        public virtual HANGSX HANGSX { get; set; }
+        //public virtual HANGSX HANGSX { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SANPHAM> SANPHAM { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<SANPHAM> SANPHAM { get; set; }
     }
 }

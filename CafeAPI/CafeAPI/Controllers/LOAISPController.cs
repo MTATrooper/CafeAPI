@@ -9,25 +9,28 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CafeAPI.DAO;
 using CafeAPI.Models;
 
 namespace CafeAPI.Controllers
 {
     public class LOAISPController : ApiController
     {
+        private LOAISP_DAO lspDAO = new LOAISP_DAO();
         private CafeDbContext db = new CafeDbContext();
 
         // GET: api/LOAISP
-        public IQueryable<LOAISP> GetLOAISP()
+        public List<LOAISP> GetLOAISP()
         {
-            return db.LOAISP;
+            List<LOAISP> lst = lspDAO.GetLOAISP();
+            return lst;
         }
 
         // GET: api/LOAISP/5
         [ResponseType(typeof(LOAISP))]
-        public async Task<IHttpActionResult> GetLOAISP(int id)
+        public IHttpActionResult GetLOAISP(int id)
         {
-            LOAISP lOAISP = await db.LOAISP.FindAsync(id);
+            LOAISP lOAISP = lspDAO.GetLSPbyId(id);
             if (lOAISP == null)
             {
                 return NotFound();
@@ -38,34 +41,20 @@ namespace CafeAPI.Controllers
 
         // PUT: api/LOAISP/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutLOAISP(int id, LOAISP lOAISP)
+        public IHttpActionResult PutLOAISP(LOAISP lOAISP)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != lOAISP.ID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(lOAISP).State = EntityState.Modified;
-
             try
             {
-                await db.SaveChangesAsync();
+                lspDAO.UpdateLOAISP(lOAISP);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LOAISPExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -73,31 +62,28 @@ namespace CafeAPI.Controllers
 
         // POST: api/LOAISP
         [ResponseType(typeof(LOAISP))]
-        public async Task<IHttpActionResult> PostLOAISP(LOAISP lOAISP)
+        public IHttpActionResult PostLOAISP(LOAISP lOAISP)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            db.LOAISP.Add(lOAISP);
-            await db.SaveChangesAsync();
-
+            lspDAO.InsertLOAISP(lOAISP);
+            
             return CreatedAtRoute("DefaultApi", new { id = lOAISP.ID }, lOAISP);
         }
 
         // DELETE: api/LOAISP/5
         [ResponseType(typeof(LOAISP))]
-        public async Task<IHttpActionResult> DeleteLOAISP(int id)
+        public IHttpActionResult DeleteLOAISP(int id)
         {
-            LOAISP lOAISP = await db.LOAISP.FindAsync(id);
+            LOAISP lOAISP = lspDAO.GetLSPbyId(id);
             if (lOAISP == null)
             {
                 return NotFound();
             }
 
-            db.LOAISP.Remove(lOAISP);
-            await db.SaveChangesAsync();
+            lspDAO.DeleteLOAISP(lOAISP);
 
             return Ok(lOAISP);
         }
