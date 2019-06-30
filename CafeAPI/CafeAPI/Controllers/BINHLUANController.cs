@@ -39,17 +39,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/BINHLUAN/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutBINHLUAN(int id, BINHLUAN bINHLUAN)
+        public async Task<IHttpActionResult> PutBINHLUAN(BINHLUAN bINHLUAN)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != bINHLUAN.ID)
-            {
-                return BadRequest();
-            }
+            
 
             db.Entry(bINHLUAN).State = EntityState.Modified;
 
@@ -59,14 +56,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BINHLUANExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

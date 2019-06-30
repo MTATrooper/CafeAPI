@@ -38,17 +38,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/XUATHANG/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutXUATHANG(int id, XUATHANG xUATHANG)
+        public async Task<IHttpActionResult> PutXUATHANG(XUATHANG xUATHANG)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != xUATHANG.ID)
-            {
-                return BadRequest();
-            }
+            
 
             db.Entry(xUATHANG).State = EntityState.Modified;
 
@@ -58,14 +55,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!XUATHANGExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

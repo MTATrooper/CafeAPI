@@ -38,17 +38,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/CHITIETNHAPHANG/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCHITIETNHAPHANG(int id, CHITIETNHAPHANG cHITIETNHAPHANG)
+        public async Task<IHttpActionResult> PutCHITIETNHAPHANG(CHITIETNHAPHANG cHITIETNHAPHANG)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cHITIETNHAPHANG.ID)
-            {
-                return BadRequest();
-            }
+            
 
             db.Entry(cHITIETNHAPHANG).State = EntityState.Modified;
 
@@ -58,14 +55,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CHITIETNHAPHANGExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

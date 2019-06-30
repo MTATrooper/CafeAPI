@@ -38,17 +38,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/THONGKE/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutTHONGKE(int id, THONGKE tHONGKE)
+        public async Task<IHttpActionResult> PutTHONGKE(THONGKE tHONGKE)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != tHONGKE.ID)
-            {
-                return BadRequest();
-            }
+           
 
             db.Entry(tHONGKE).State = EntityState.Modified;
 
@@ -58,14 +55,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!THONGKEExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

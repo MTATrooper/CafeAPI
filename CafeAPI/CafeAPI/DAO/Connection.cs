@@ -27,29 +27,34 @@ namespace CafeAPI.DAO
         public Connection()
         {
             this.Conn = new SqlConnection(this.Strconn);
-            this.Conn.Open();
+            //this.Conn.Open();
         }
 
         public DataTable LoadTable(string sql)
         {
+            this.Conn.Open();
             SqlDataAdapter da = new SqlDataAdapter(sql, Conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
+            this.Conn.Close();
             return dt;
         }
         
         public bool Execute(string query)
         {
+            this.Conn.Open();
             SqlCommand cmd = new SqlCommand(query, Conn);
             try
             {
                 cmd.ExecuteNonQuery();
+                this.Conn.Close();
                 return true;
             }
             catch { return false; }
         }
         public int Excute_Sql(string strQuery, CommandType cmdtype, string[] para, object[] values)
         {
+            this.Conn.Open();
             int efftectRecord = 0;
             SqlCommand sqlcmd = new SqlCommand();
             sqlcmd.CommandText = strQuery;
@@ -69,10 +74,12 @@ namespace CafeAPI.DAO
             {
                 //MessageBox.Show("Error:" + ex.Message);
             }
+            this.Conn.Close();
             return efftectRecord;
         }
         public DataTable FillDataTable(string strQuery, CommandType cmdtype)
         {
+            this.Conn.Open();
             DataTable dt = new DataTable();
             try
             {
@@ -88,10 +95,12 @@ namespace CafeAPI.DAO
             {
                 //MessageBox.Show("Error: " + ex.Message);
             }
+            this.Conn.Close();
             return dt;
         }
         public DataTable FillDataTable(string strQuery, CommandType cmdtype, string[] para, object[] values)
         {
+            this.Conn.Open();
             DataTable dt = new DataTable();
             try
             {
@@ -115,6 +124,7 @@ namespace CafeAPI.DAO
             {
                 //MessageBox.Show("Error: " + ex.Message);
             }
+            this.Conn.Close();
             return dt;
         }
         public List<T> ConvertToList<T>(DataTable datatable) where T : new()

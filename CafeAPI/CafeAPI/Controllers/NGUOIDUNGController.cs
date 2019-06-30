@@ -38,16 +38,11 @@ namespace CafeAPI.Controllers
 
         // PUT: api/NGUOIDUNG/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutNGUOIDUNG(int id, NGUOIDUNG nGUOIDUNG)
+        public async Task<IHttpActionResult> PutNGUOIDUNG(NGUOIDUNG nGUOIDUNG)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != nGUOIDUNG.ID)
-            {
-                return BadRequest();
             }
 
             db.Entry(nGUOIDUNG).State = EntityState.Modified;
@@ -58,14 +53,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!NGUOIDUNGExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

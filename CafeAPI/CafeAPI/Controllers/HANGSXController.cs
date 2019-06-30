@@ -38,17 +38,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/HANGSX/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutHANGSX(int id, HANGSX hANGSX)
+        public async Task<IHttpActionResult> PutHANGSX(HANGSX hANGSX)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != hANGSX.ID)
-            {
-                return BadRequest();
-            }
+            
 
             db.Entry(hANGSX).State = EntityState.Modified;
 
@@ -58,14 +55,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HANGSXExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

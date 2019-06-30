@@ -38,17 +38,13 @@ namespace CafeAPI.Controllers
 
         // PUT: api/NHACUNGCAP/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutNHACUNGCAP(int id, NHACUNGCAP nHACUNGCAP)
+        public async Task<IHttpActionResult> PutNHACUNGCAP(NHACUNGCAP nHACUNGCAP)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != nHACUNGCAP.ID)
-            {
-                return BadRequest();
-            }
 
             db.Entry(nHACUNGCAP).State = EntityState.Modified;
 
@@ -58,14 +54,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!NHACUNGCAPExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

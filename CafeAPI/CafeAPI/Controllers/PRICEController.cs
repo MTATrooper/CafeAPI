@@ -38,17 +38,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/PRICE/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutPRICE(int id, PRICE pRICE)
+        public async Task<IHttpActionResult> PutPRICE(PRICE pRICE)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != pRICE.ID)
-            {
-                return BadRequest();
-            }
+           
 
             db.Entry(pRICE).State = EntityState.Modified;
 
@@ -58,14 +55,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PRICEExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

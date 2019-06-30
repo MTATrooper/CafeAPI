@@ -38,17 +38,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/BAIBAO/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutBAIBAO(int id, BAIBAO bAIBAO)
+        public async Task<IHttpActionResult> PutBAIBAO(BAIBAO bAIBAO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != bAIBAO.ID)
-            {
-                return BadRequest();
-            }
+           
 
             db.Entry(bAIBAO).State = EntityState.Modified;
 
@@ -58,14 +55,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BAIBAOExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

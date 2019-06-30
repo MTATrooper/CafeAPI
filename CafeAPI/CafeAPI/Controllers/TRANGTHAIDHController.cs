@@ -38,17 +38,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/TRANGTHAIDH/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutTRANGTHAIDH(int id, TRANGTHAIDH tRANGTHAIDH)
+        public async Task<IHttpActionResult> PutTRANGTHAIDH(TRANGTHAIDH tRANGTHAIDH)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != tRANGTHAIDH.ID)
-            {
-                return BadRequest();
-            }
+           
 
             db.Entry(tRANGTHAIDH).State = EntityState.Modified;
 
@@ -58,14 +55,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TRANGTHAIDHExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);

@@ -32,18 +32,17 @@ namespace CafeAPI.DAO
         }
         public void InsertLOAISP(LOAISP lsp)
         {
-            string query = "insert into LOAISP values(@ten, @anh, @mota, @ngaytao,@idhang, @trangthai)";
+            string query = "insertLOAISP";
             string[] para = new string[6] { "@ten", "@anh", "@mota", "@ngaytao" ,"@idhang", "@trangthai" };
             object[] value = new object[6] { lsp.TEN, lsp.ANH, lsp.MOTA, lsp.NGAYTAO, lsp.HANGSX_ID, lsp.TRANGTHAI };
-            cn.Excute_Sql(query, CommandType.Text, para, value);
+            cn.Excute_Sql(query, CommandType.StoredProcedure, para, value);
         }
         public void UpdateLOAISP(LOAISP lsp)
         {
-            string query = "update LOAISP set TEN = @ten, ANH = @anh, MOTA = @mota, NGAYTAO = @ngaytao, HANGSX_ID = @idhang, TRANGTHAI = @trangthai" +
-                "where ID = @id";
-            string[] para = new string[7] { "@id", "@ten", "@anh", "@mota", "@ngaytao", "@idhang", "@trangthai" };
+            string query = "updateLOAISP";
+            string[] para = new string[7] { "@id", "@ten", "@anh", "@mota", "@ngaytao", "@idhang", "@trangthai"};
             object[] value = new object[7] { lsp.ID, lsp.TEN, lsp.ANH, lsp.MOTA, lsp.NGAYTAO, lsp.HANGSX_ID, lsp.TRANGTHAI };
-            cn.Excute_Sql(query, CommandType.Text, para, value);
+            cn.Excute_Sql(query, CommandType.StoredProcedure, para, value);
         }
         public void DeleteLOAISP(LOAISP lsp)
         {

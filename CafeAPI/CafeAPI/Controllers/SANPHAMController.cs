@@ -24,6 +24,7 @@ namespace CafeAPI.Controllers
         public List<SANPHAM> GetSANPHAM()
         {
             return spDAO.GetSANPHAM();
+            //return db.SANPHAM.ToList();
         }
 
         // GET: api/SANPHAM/LoaiSP?id={id}
@@ -39,6 +40,7 @@ namespace CafeAPI.Controllers
         public IHttpActionResult GetSANPHAM(int id)
         {
             SANPHAM sANPHAM = spDAO.GetSANPHAMbyId(id);
+            //SANPHAM sANPHAM = await db.SANPHAM.FindAsync(id);
             if (sANPHAM == null)
             {
                 return NotFound();
@@ -49,16 +51,18 @@ namespace CafeAPI.Controllers
 
         // PUT: api/SANPHAM/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSANPHAM(SANPHAM sANPHAM)
+        public async Task<IHttpActionResult> PutSANPHAM(SANPHAM sANPHAM)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            db.Entry(sANPHAM).State = EntityState.Modified;
             try
             {
-                spDAO.UpdateSANPHAM(sANPHAM);
+                //spDAO.UpdateSANPHAM(sANPHAM);
+                await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -70,14 +74,16 @@ namespace CafeAPI.Controllers
 
         // POST: api/SANPHAM
         [ResponseType(typeof(SANPHAM))]
-        public IHttpActionResult PostSANPHAM(SANPHAM sANPHAM)
+        public async Task<IHttpActionResult> PostSANPHAM(SANPHAM sANPHAM)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            spDAO.InsertSANPHAM(sANPHAM);
+            //spDAO.InsertSANPHAM(sANPHAM);
+            db.SANPHAM.Add(sANPHAM);
+            await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = sANPHAM.ID }, sANPHAM);
         }
@@ -119,6 +125,8 @@ namespace CafeAPI.Controllers
         {
             DateTime now = DateTime.Now;
             PRICE price = spDAO.GetPriceBySanPham(id);
+            //PRICE price = await db.PRICE.SingleOrDefaultAsync<PRICE>(x => x.SANPHAM_ID == id && 
+            //(x.BATDAU<= now && x.KETTHUC >=now || x.BATDAU <= now && x.KETTHUC == null));
             return Ok(price.GIABAN);
         }
     }

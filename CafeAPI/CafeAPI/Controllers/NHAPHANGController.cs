@@ -38,17 +38,14 @@ namespace CafeAPI.Controllers
 
         // PUT: api/NHAPHANG/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutNHAPHANG(int id, NHAPHANG nHAPHANG)
+        public async Task<IHttpActionResult> PutNHAPHANG(NHAPHANG nHAPHANG)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != nHAPHANG.ID)
-            {
-                return BadRequest();
-            }
+          
 
             db.Entry(nHAPHANG).State = EntityState.Modified;
 
@@ -58,14 +55,7 @@ namespace CafeAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!NHAPHANGExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+               
             }
 
             return StatusCode(HttpStatusCode.NoContent);

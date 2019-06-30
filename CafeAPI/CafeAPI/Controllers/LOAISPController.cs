@@ -24,6 +24,7 @@ namespace CafeAPI.Controllers
         {
             List<LOAISP> lst = lspDAO.GetLOAISP();
             return lst;
+            //return db.LOAISP.ToList();
         }
 
         // GET: api/LOAISP/5
@@ -41,7 +42,7 @@ namespace CafeAPI.Controllers
 
         // PUT: api/LOAISP/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutLOAISP(LOAISP lOAISP)
+        public IHttpActionResult PutLOAISP([FromBody]LOAISP lOAISP)
         {
             if (!ModelState.IsValid)
             {
