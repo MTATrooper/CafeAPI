@@ -50,7 +50,7 @@ namespace CafeAPI.DAO
                 this.Conn.Close();
                 return true;
             }
-            catch { return false; }
+            catch { this.Conn.Close(); return false; }
         }
         public int Excute_Sql(string strQuery, CommandType cmdtype, string[] para, object[] values)
         {

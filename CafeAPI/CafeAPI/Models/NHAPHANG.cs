@@ -12,8 +12,8 @@ namespace CafeAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHAPHANG()
         {
-            CHITIETNHAPHANG = new HashSet<CHITIETNHAPHANG>();
-            XUATHANG = new HashSet<XUATHANG>();
+            //CHITIETNHAPHANG = new HashSet<CHITIETNHAPHANG>();
+            //XUATHANG = new HashSet<XUATHANG>();
         }
 
         public int ID { get; set; }
@@ -23,12 +23,12 @@ namespace CafeAPI.Models
 
         public int? NHACC_ID { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETNHAPHANG> CHITIETNHAPHANG { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<CHITIETNHAPHANG> CHITIETNHAPHANG { get; set; }
 
-        public virtual NHACUNGCAP NHACUNGCAP { get; set; }
+        //public virtual NHACUNGCAP NHACUNGCAP { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<XUATHANG> XUATHANG { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<XUATHANG> XUATHANG { get; set; }
     }
 }

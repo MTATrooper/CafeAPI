@@ -12,7 +12,7 @@ namespace CafeAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TRANGTHAIDH()
         {
-            DONHANG = new HashSet<DONHANG>();
+            //DONHANG = new HashSet<DONHANG>();
         }
 
         public int ID { get; set; }
@@ -20,7 +20,7 @@ namespace CafeAPI.Models
         [StringLength(30)]
         public string TEN { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DONHANG> DONHANG { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<DONHANG> DONHANG { get; set; }
     }
 }

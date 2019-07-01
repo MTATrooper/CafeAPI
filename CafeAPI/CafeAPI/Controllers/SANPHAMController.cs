@@ -129,5 +129,35 @@ namespace CafeAPI.Controllers
             //(x.BATDAU<= now && x.KETTHUC >=now || x.BATDAU <= now && x.KETTHUC == null));
             return Ok(price.GIABAN);
         }
+
+        [HttpGet]
+        [Route("ThongtinSP")]
+        public IHttpActionResult GetInfoSANPHAM(int id)
+        {
+            DateTime now = DateTime.Now;
+            var lst = (from p in db.SANPHAM
+                       select new
+                       {
+                           ID = p.ID,
+                           KHOILUONG = p.KHOILUONG,
+                           MOTA = p.MOTA,
+                           ANH = p.ANH,
+                           SOLUONG = p.SOLUONG,
+                           TEN = ((from z in db.LOAISP
+                                      where z.ID == p.LOAISP_ID
+                                      select new
+                                      {
+                                          z.TEN
+                                      }).FirstOrDefault().TEN),
+                           GIA = (from x in db.PRICE
+                                  from y in db.SANPHAM
+                                  where x.SANPHAM_ID == y.ID && (x.BATDAU <= now && x.KETTHUC >= now || x.BATDAU <= now && x.KETTHUC == null)
+                                  select new
+                                  {
+                                      x.GIABAN
+                                  }).FirstOrDefault().GIABAN,
+                       });
+            return Ok(lst);
+        }
     }
 }

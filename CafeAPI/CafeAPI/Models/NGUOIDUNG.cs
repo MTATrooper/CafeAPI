@@ -12,8 +12,8 @@ namespace CafeAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NGUOIDUNG()
         {
-            BINHLUAN = new HashSet<BINHLUAN>();
-            DONHANG = new HashSet<DONHANG>();
+            //BINHLUAN = new HashSet<BINHLUAN>();
+            //DONHANG = new HashSet<DONHANG>();
         }
 
         public int ID { get; set; }
@@ -38,10 +38,10 @@ namespace CafeAPI.Models
 
         public int? QUYEN { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BINHLUAN> BINHLUAN { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<BINHLUAN> BINHLUAN { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DONHANG> DONHANG { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<DONHANG> DONHANG { get; set; }
     }
 }

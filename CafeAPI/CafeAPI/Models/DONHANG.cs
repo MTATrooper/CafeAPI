@@ -12,7 +12,7 @@ namespace CafeAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DONHANG()
         {
-            CHITIETDONHANG = new HashSet<CHITIETDONHANG>();
+            //CHITIETDONHANG = new HashSet<CHITIETDONHANG>();
         }
 
         public int ID { get; set; }
@@ -35,11 +35,11 @@ namespace CafeAPI.Models
 
         public int? KHACHHANG_ID { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHITIETDONHANG> CHITIETDONHANG { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<CHITIETDONHANG> CHITIETDONHANG { get; set; }
 
-        public virtual NGUOIDUNG NGUOIDUNG { get; set; }
+        //public virtual NGUOIDUNG NGUOIDUNG { get; set; }
 
-        public virtual TRANGTHAIDH TRANGTHAIDH { get; set; }
+        //public virtual TRANGTHAIDH TRANGTHAIDH { get; set; }
     }
 }

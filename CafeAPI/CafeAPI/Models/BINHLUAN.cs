@@ -19,8 +19,8 @@ namespace CafeAPI.Models
 
         public int? KHACHHANG_ID { get; set; }
 
-        public virtual NGUOIDUNG NGUOIDUNG { get; set; }
+        //public virtual NGUOIDUNG NGUOIDUNG { get; set; }
 
-        public virtual SANPHAM SANPHAM { get; set; }
+        //public virtual SANPHAM SANPHAM { get; set; }
     }
 }

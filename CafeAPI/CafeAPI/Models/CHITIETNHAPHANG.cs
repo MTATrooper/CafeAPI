@@ -21,8 +21,8 @@ namespace CafeAPI.Models
 
         public int? SOLUONGCONLAI { get; set; }
 
-        public virtual NHAPHANG NHAPHANG { get; set; }
+        //public virtual NHAPHANG NHAPHANG { get; set; }
 
-        public virtual SANPHAM SANPHAM { get; set; }
+        //public virtual SANPHAM SANPHAM { get; set; }
     }
 }

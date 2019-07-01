@@ -12,7 +12,7 @@ namespace CafeAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHACUNGCAP()
         {
-            NHAPHANG = new HashSet<NHAPHANG>();
+            //NHAPHANG = new HashSet<NHAPHANG>();
         }
 
         public int ID { get; set; }
@@ -26,7 +26,7 @@ namespace CafeAPI.Models
         [StringLength(15)]
         public string SDT { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NHAPHANG> NHAPHANG { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<NHAPHANG> NHAPHANG { get; set; }
     }
 }
