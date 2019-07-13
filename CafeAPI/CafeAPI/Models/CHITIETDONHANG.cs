@@ -14,6 +14,13 @@ namespace CafeAPI.Models
         {
             //XUATHANG = new HashSet<XUATHANG>();
         }
+        public CHITIETDONHANG(int idSP, int idDH, int soluong, int dongia)
+        {
+            SANPHAM_ID = idSP;
+            DONHANG_ID = idDH;
+            SOLUONG = soluong;
+            DONGIA = dongia;
+        }
 
         public int ID { get; set; }
 

@@ -9,10 +9,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CafeAPI.DAO;
 using CafeAPI.Models;
 
 namespace CafeAPI.Controllers
 {
+    [RoutePrefix("api/DONHANG")]
     public class DONHANGController : ApiController
     {
         private CafeDbContext db = new CafeDbContext();
@@ -80,6 +82,8 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            dONHANG.NGAYDAT = DateTime.Now;
+            dONHANG.TRANGTHAI_ID = 1;
             db.DONHANG.Add(dONHANG);
             await db.SaveChangesAsync();
 
@@ -114,6 +118,34 @@ namespace CafeAPI.Controllers
         private bool DONHANGExists(int id)
         {
             return db.DONHANG.Count(e => e.ID == id) > 0;
+        }
+
+        [Route("dathang")]
+        [ResponseType(typeof(int))]
+        public IHttpActionResult Order(string nguoinhan, string sdt, string diachi, int? idKH, string listIdSP, string listsoluong)
+        {
+            try
+            {
+                int[] idSP = new DonHangDAO().ConvertStringToArray(listIdSP);
+                int[] soluong = new DonHangDAO().ConvertStringToArray(listsoluong);
+                DONHANG dh = new DONHANG(nguoinhan, sdt, diachi, idKH);
+                db.DONHANG.Add(dh);
+                db.SaveChanges();
+                for (int i = 0; i < idSP.Length; i++)
+                {
+                    CHITIETDONHANG CTDH = new CHITIETDONHANG(idSP[i], dh.ID, soluong[i], (int)new SANPHAM_DAO().GetPriceBySanPham(idSP[i]).GIABAN);
+                    db.CHITIETDONHANG.Add(CTDH);
+                    db.SaveChanges();
+                    dh.TONGTIEN += CTDH.SOLUONG * CTDH.DONGIA;
+                    db.Entry(dh).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return Ok(1);
+            }
+            catch
+            {
+                return Ok(0);
+            }
         }
     }
 }

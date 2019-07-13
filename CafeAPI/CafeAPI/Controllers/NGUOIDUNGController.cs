@@ -13,6 +13,7 @@ using CafeAPI.Models;
 
 namespace CafeAPI.Controllers
 {
+    [RoutePrefix("api/NGUOIDUNG")]
     public class NGUOIDUNGController : ApiController
     {
         private CafeDbContext db = new CafeDbContext();
@@ -67,7 +68,7 @@ namespace CafeAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            if (nGUOIDUNG.QUYEN == null) nGUOIDUNG.QUYEN = 0;
             db.NGUOIDUNG.Add(nGUOIDUNG);
             await db.SaveChangesAsync();
 
@@ -102,6 +103,17 @@ namespace CafeAPI.Controllers
         private bool NGUOIDUNGExists(int id)
         {
             return db.NGUOIDUNG.Count(e => e.ID == id) > 0;
+        }
+
+        [HttpGet]
+        [Route("CheckLogin")]
+        public int CheckLogin(string tendangnhap, string matkhau, int quyen)
+        {
+            if (db.NGUOIDUNG.Where(x => x.TENDANGNHAP == tendangnhap && x.MATKHAU == matkhau && x.QUYEN == quyen).ToList().Count == 0)
+            {
+                return 0;
+            }
+            else return 1;
         }
     }
 }

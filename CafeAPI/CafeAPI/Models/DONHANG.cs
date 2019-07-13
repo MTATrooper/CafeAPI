@@ -14,6 +14,16 @@ namespace CafeAPI.Models
         {
             //CHITIETDONHANG = new HashSet<CHITIETDONHANG>();
         }
+        public DONHANG(string nguoinhan, string sdt, string diachi, int? idKH)
+        {
+            TENNGUOINHAN = nguoinhan;
+            SDT = sdt;
+            DIACHI = diachi;
+            KHACHHANG_ID = idKH;
+            NGAYDAT = DateTime.Now;
+            TONGTIEN = 0;
+            TRANGTHAI_ID = 1;
+        }
 
         public int ID { get; set; }
 
