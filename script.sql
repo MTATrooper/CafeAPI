@@ -35,7 +35,6 @@ create function getLOAISPbyID(@id int)
 returns table
 	return select * from LOAISP where ID = @id
 
----------------------------------------SANPHAM-----------------------
 --Tạo sản phẩm mới
 go
 create proc insertSANPHAM (@khoiluong int, @anh nvarchar(200), @mota ntext, @soluong int, @idloaisp int)
@@ -74,6 +73,28 @@ GO
 create function getPriceBySanPham(@id int) returns table
 	return select p.ID, p.GIABAN, p.BATDAU, p.KETTHUC, p.SANPHAM_ID from Price p join SANPHAM s on p.SANPHAM_ID = s.ID 
 		where s.ID = @id and (p.BATDAU <= GETDATE() and p.KETTHUC >= GETDATE() or p.BATDAU <= GETDATE() and p.KETTHUC is null)
+GO
+--Thêm giá  cho sản phẩm mới
+Alter proc InsertPrice(@idSP int, @giaban int)
+as
+begin
+	insert into PRICE values(@giaban, GETDATE(), NULL, @idSP)
+end
+GO
+--Update giá sản phẩm
+ALter proc UpdatePrice(@idSP int, @giaban int)
+as
+begin
+	declare @giacu int, @idPrice int
+	select @giacu = GIABAN, @idPrice = ID from dbo.getPriceBySanPham(@idSP)
+	if (@giaban != @giacu)
+	begin
+		update PRICE
+		set KETTHUC = GETDATE() - 1
+		where ID = @idPrice
+		exec InsertPrice @idSP,@giaban
+	end
+end
 GO
 ---Nhập hàng----
 create proc insertNhaphang (@idNCC int)
@@ -114,12 +135,16 @@ begin
 end
 GO
 ---Thêm mới đơn hàng
-create proc insertDonHang(@nguoinhan nvarchar(50), @sdt varchar(15), @diachi nvarchar(100), @idKH int)
+Create proc insertDonHang(@nguoinhan nvarchar(50), @sdt varchar(15), @diachi nvarchar(100), @idKH int)
 as
 begin
 	insert into DONHANG
-		values (@nguoinhan, @sdt, @diachi, @idKH)
+		values (GETDATE(), @nguoinhan, @sdt, @diachi, 0, 1, @idKH)
 end
+GO
+--Lấy Đơn hàng theo ID
+create function getDonHang(@id int)
+	returns table return select * from DONHANG where ID = @id
 GO
 --Lấy ID đơn hàng vừa thêm
 create function getNewIdDonHang() returns int
@@ -130,6 +155,7 @@ begin
 	return @id
 end
 GO
+select dbo.getNewIdDonHang()
 --Thêm các Chi tiết đơn hàng
 create proc insertCTDH(@idSP int, @idDH int, @soluong int, @giaban int)
 as
@@ -147,18 +173,58 @@ begin
 end
 GO
 --Update trạng thái đơn hàng
-create proc updateTrangThaiDH(@idDH int, @idTrangThaiMoi int)
+Alter proc updateTrangThaiDH(@idDH int, @idTrangThaiMoi int)
 as
 begin
-	if (@idTrangThaiMoi != 4)
+	declare @idCTDH int
+	if (@idTrangThaiMoi = 3)
 		begin
+			declare @idSP int, @ngaydat date
+			select @ngaydat = NGAYDAT from DONHANG where ID = @idDH
+			declare cursorCTDH cursor for
+				select ID, SANPHAM_ID from CHITIETDONHANG where DONHANG_ID = @idDH
+			open cursorCTDH
+			FETCH NEXT FROM cursorCTDH into @idCTDH, @idSP
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				declare @sl int, @gianhap int, @giaban int, @doanhthu int, @loinhuan int
+				declare cursorXH cursor for select SOLUONGXUAT, GIABAN, GIANHAP from XUATHANG where CHITIETDH_ID = @idCTDH
+				open cursorXH
+				FETCH NEXT FROM cursorXH into @sl, @giaban, @gianhap
+				WHILE @@FETCH_STATUS = 0
+				BEGIN
+					declare @count int
+					select @count = count(ID) from THONGKE where NGAY = @ngaydat and SANPHAM_ID = @idSP
+					if (@count = 0)
+						begin
+							set @doanhthu = @sl*@giaban
+							set @loinhuan = @sl*(@giaban-@gianhap)
+							insert into THONGKE values (@ngaydat, @idSP, @sl, @doanhthu, @loinhuan)
+						end
+					else
+						begin
+							select @doanhthu = DOANHTHU, @loinhuan = LOINHUAN from THONGKE
+									where NGAY = @ngaydat and SANPHAM_ID = @idSP
+							set @doanhthu = @doanhthu + @sl*@giaban
+							set @loinhuan = @loinhuan + @sl*(@giaban-@gianhap)
+							update THONGKE
+							set SOLUONGBAN = SOLUONGBAN + @sl, DOANHTHU = @doanhthu, LOINHUAN = @loinhuan
+							where NGAY = @ngaydat and SANPHAM_ID = @idSP
+						end
+					FETCH NEXT FROM cursorXH into @sl, @giaban, @gianhap
+				END
+				close cursorXH
+				deallocate cursorXH
+				FETCH NEXT FROM cursorCTDH into @idCTDH, @idSP
+			END
+			close cursorCTDH
+			deallocate cursorCTDH
 			update DONHANG
 			set TRANGTHAI_ID = @idTrangThaiMoi
 			where ID = @idDH
 		end
-	else
+	else if (@idTrangThaiMoi = 4)
 		begin
-			declare @idCTDH int
 			declare cursorCTDH cursor for
 				select ID from CHITIETDONHANG where DONHANG_ID = @idDH
 			open cursorCTDH
@@ -177,9 +243,15 @@ begin
 			set TRANGTHAI_ID = @idTrangThaiMoi
 			where ID = @idDH
 		end
+	else
+		begin
+			update DONHANG
+			set TRANGTHAI_ID = @idTrangThaiMoi
+			where ID = @idDH
+		end
 end
 GO
---////////////////////////////////////////////TRIGGER///////////////////
+--////////////////////////////////////////////TRIGGER//////////////////////////////
 --Update lại số lượng sản phẩm khi nhập lô mới
 create trigger updateSoLuongSP on CHITIETNHAPHANG for insert
 as
@@ -226,3 +298,15 @@ begin
 	set SOLUONG = SOLUONG + @soluongxuat
 	where ID = @idSP
 end
+GO
+--Update lại tổng tiền trong đơn hàng khi thêm chi tiết đơn hàng
+Create Trigger Insert_UpdateTongTien on CHITIETDONHANG for insert
+as
+begin
+	declare @idDH int, @sl int, @giaban int
+	select @idDH = DONHANG_ID, @sl = SOLUONG, @giaban = DONGIA from inserted
+	update DONHANG
+	set TONGTIEN = TONGTIEN + @sl*@giaban
+	where ID = @idDH
+end
+GO
