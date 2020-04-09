@@ -1,0 +1,58 @@
+﻿@model CafeClientWeb.Models.User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Trang chủ</a></li>
+            <li class="active">Đăng Kí</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- register -->
+<div class="register">
+    <div class="container">
+        <div class="wrapper">
+            @if (TempData["Error"] != null)//kiểm tra thông báo để hiển thị
+            {
+                <div class="alert alert-error alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h3>Thất bại</h3>
+                    @TempData["Error"]
+                </div>
+            }
+            else if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h3>Thành công</h3>
+                    @TempData["Success"]
+                </div>
+
+            }
+        </div>
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Đăng Kí Tại Đây</h3>
+        <div class="login-form-grids">
+            <h5 class="animated wow slideInUp" data-wow-delay=".5s">Thông tin cá nhân</h5>
+            @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+            {
+                <input type="text" name="TENDANGNHAP" placeholder="Tên đăng nhập" required>
+                <input type="text" name="TEN" placeholder="Tên hiển thị" required>
+                <input type="text" name="DIACHI" placeholder="Địa chỉ">
+                <input type="text" name="SDT" placeholder="Số diện thoại">
+                <input type="email" name="EMAIL" placeholder="Địa chỉ Email">
+                <input type="password" name="MATKHAU" placeholder="Mật khẩu" required>
+                <div class="register-check-box">
+                    <div class="check">
+                        <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Tôi chấp nhận điều kiện</label>
+                    </div>
+                </div>
+                <input type="submit" value="Register">
+            }
+            </div>
+    </div>
+</div>
+<!-- //register -->

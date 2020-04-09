@@ -1,0 +1,264 @@
+﻿@using CafeClientWeb.DAO;
+@using CafeClientWeb.Models;
+@model List<HOMELOAISP>
+@{ 
+    string url = ConnectApi.path;
+}
+<style>
+    img .img-responsive {
+        width: 191px;
+        height: 255px;
+    }
+</style>
+<div class="new-collections">
+    <div class="container">
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Sản phẩm Bán chạy</h3>
+        <div class="new-collections-grids">
+            <div class="col-md-3 new-collections-grid">
+                <div class="new-collections-grid1 animated wow slideInUp " style=" margin-top: 16px;" data-wow-delay=".5s">
+                    <div class="new-collections-grid1-image">
+                        <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[0].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[0].ID).FirstOrDefault().ID})" class="product-image"><img  src=@url@Model[0].ANH alt=" " class="img-responsive" /></a>
+                        <div class="new-collections-grid1-image-pos">
+                            <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[0].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[0].ID).FirstOrDefault().ID})">Xem chi tiết</a>
+                        </div>
+                        <div class="new-collections-grid1-right">
+                            <div class="rating">
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4><a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[0].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[0].ID).FirstOrDefault().ID})">@Model[0].TEN</a></h4>
+                    <p>@Html.Raw(@Model[0].MOTA)</p>
+                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                        <p><span class="item_price">@(Model[0].GIA.Value.ToString("N0"))</span><a class="item_add" href="#" onclick="toro(@(db.SANPHAM.Where(x => x.LOAISP_ID == Model[0].ID).FirstOrDefault().ID),@Model[0].ID)">Thêm vào giỏ</a></p>
+                    </div>
+                </div>
+                <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                    <div class="new-collections-grid1-image">
+                        <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[1].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[1].ID).FirstOrDefault().ID})" class="product-image"><img  src=@url@Model[1].ANH alt=" " class="img-responsive" /></a>
+                        <div class="new-collections-grid1-image-pos">
+                            <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[1].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[1].ID).FirstOrDefault().ID})">Xem chi tiết</a>
+                        </div>
+                        <div class="new-collections-grid1-right">
+                            <div class="rating">
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4><a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[1].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[1].ID).FirstOrDefault().ID})">@Model[1].TEN</a></h4>
+                    <p>@Html.Raw(@Model[1].MOTA)</p>
+                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                        <p><span class="item_price">@(Model[1].GIA.Value.ToString("N0"))</span><a class="item_add" href="#" onclick="toro(@(db.SANPHAM.Where(x => x.LOAISP_ID == Model[1].ID).FirstOrDefault().ID),@Model[1].ID)">Thêm vào giỏ </a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 new-collections-grid">
+                <div class="new-collections-grid1 animated wow slideInUp " style=" margin-top: 16px;" data-wow-delay=".5s">
+                    <div class="new-collections-grid1-image">
+                        <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[2].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[2].ID).FirstOrDefault().ID})" class="product-image"><img src=@url@Model[2].ANH alt=" " class="img-responsive" /></a>
+                        <div class="new-collections-grid1-image-pos">
+                            <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[2].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[2].ID).FirstOrDefault().ID})">Xem chi tiết</a>
+                        </div>
+                        <div class="new-collections-grid1-right">
+                            <div class="rating">
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4><a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[2].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[0].ID).FirstOrDefault().ID})">@Model[2].TEN</a></h4>
+                    <p>@Html.Raw(@Model[2].MOTA)</p>
+                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                        <p><span class="item_price">@(Model[2].GIA.Value.ToString("N0"))</span><a class="item_add" href="#" onclick="toro(@(db.SANPHAM.Where(x => x.LOAISP_ID == Model[2].ID).FirstOrDefault().ID),@Model[2].ID)">Thêm vào giỏ</a></p>
+                    </div>
+                </div>            
+                <div class="new-collections-grid-sub-grids">
+                    <div class="new-collections-grid1-sub">
+                        <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                            <div class="new-collections-grid1-image">
+                                <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[3].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[3].ID).FirstOrDefault().ID})" class="product-image"><img src=@url@Model[3].ANH alt=" " class="img-responsive" /></a>
+                                <div class="new-collections-grid1-image-pos">
+                                    <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[3].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[3].ID).FirstOrDefault().ID})">Xem chi tiết</a>
+                                </div>
+                                <div class="new-collections-grid1-right">
+                                    <div class="rating">
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4><a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[3].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[3].ID).FirstOrDefault().ID})">@Model[3].TEN</a></h4>
+                            <p>@Html.Raw(@Model[3].MOTA)</p>
+                            <div class="new-collections-grid1-left simpleCart_shelfItem">
+                                <p><span class="item_price">@(Model[3].GIA.Value.ToString("N0"))</span><a class="item_add" href="#" onclick="toro(@(db.SANPHAM.Where(x => x.LOAISP_ID == Model[3].ID).FirstOrDefault().ID),@Model[3].ID)">Thêm vào giỏ </a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-collections-grid1-sub">
+                        <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                            <div class="new-collections-grid1-image">
+                                <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[4].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[4].ID).FirstOrDefault().ID})" class="product-image"><img src=@url@Model[4].ANH alt=" " class="img-responsive" /></a>
+                                <div class="new-collections-grid1-image-pos">
+                                    <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[4].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[4].ID).FirstOrDefault().ID})">Xem chi tiết</a>
+                                </div>
+                                <div class="new-collections-grid1-right">
+                                    <div class="rating">
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4><a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[4].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[4].ID).FirstOrDefault().ID})">@Model[4].TEN</a></h4>
+                            <p>@Html.Raw(@Model[4].MOTA)</p>
+                            <div class="new-collections-grid1-left simpleCart_shelfItem">
+                                <p><span class="item_price">@(Model[4].GIA.Value.ToString("N0"))</span><a class="item_add" href="#" onclick="toro(@(db.SANPHAM.Where(x => x.LOAISP_ID == Model[4].ID).FirstOrDefault().ID),@Model[4].ID)">Thêm vào giỏ </a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="col-md-3 new-collections-grid">
+                <div class="new-collections-grid1 animated wow slideInUp" style="margin-top: 16px;" data-wow-delay=".5s">
+                    <div class="new-collections-grid1-image">
+                        <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[5].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[5].ID).FirstOrDefault().ID})" class="product-image"><img  src=@url@Model[5].ANH alt=" " class="img-responsive" /></a>
+                        <div class="new-collections-grid1-image-pos">
+                            <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[5].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[5].ID).FirstOrDefault().ID})">Xem chi tiết</a>
+                        </div>
+                        <div class="new-collections-grid1-right">
+                            <div class="rating">
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4><a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[5].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[5].ID).FirstOrDefault().ID})">@Model[5].TEN</a></h4>
+                    <p>@Html.Raw(@Model[5].MOTA)</p>
+                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                        <p><span class="item_price">@(Model[5].GIA.Value.ToString("N0"))</span><a class="item_add" href="#" onclick="toro(@(db.SANPHAM.Where(x => x.LOAISP_ID == Model[5].ID).FirstOrDefault().ID),@Model[5].ID)">Thêm vào giỏ </a></p>
+                    </div>
+                </div>
+                <div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s">
+                    <div class="new-collections-grid1-image">
+                        <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[6].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[6].ID).FirstOrDefault().ID})" class="product-image"><img  src=@url@Model[6].ANH alt=" " class="img-responsive" /></a>
+                        <div class="new-collections-grid1-image-pos">
+                            <a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[6].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[6].ID).FirstOrDefault().ID})">Xem chi tiết</a>
+                        </div>
+                        <div class="new-collections-grid1-right">
+                            <div class="rating">
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/2.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="~/assets/images/1.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4><a href="@Url.Action("Detail","Product",new {LoaiSpID = Model[6].ID, SanPhamID = db.SANPHAM.Where(x => x.LOAISP_ID == Model[6].ID).FirstOrDefault().ID})">@Model[6].TEN</a></h4>
+                    <p>@Html.Raw(@Model[6].MOTA)</p>
+                    <div class="new-collections-grid1-left simpleCart_shelfItem">
+                        <p><span class="item_price">@(Model[6].GIA.Value.ToString("N0"))</span><a class="item_add" href="#" onclick="toro(@(db.SANPHAM.Where(x => x.LOAISP_ID == Model[6].ID).FirstOrDefault().ID),@Model[6].ID)">Thêm vào giỏ </a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>

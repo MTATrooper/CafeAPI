@@ -1,0 +1,77 @@
+﻿@using CafeClientWeb.Models;
+@using CafeClientWeb.DAO;
+@model List<TheoDoiDonHang>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string path = ConnectApi.path;
+}
+<style type="text/css">
+    .tiki-account .content-right {
+        width: 975px;
+        float: left;
+        margin-left: 5px;
+        position: relative;
+    }
+    .tiki-account .wrap h1.have-margin {
+        margin-bottom: 15px;
+        font-family: Roboto;
+        font-size: 19px;
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        color: #242424;
+    }
+    .tiki-account .wrap .dashboard-order table, .tiki-account .wrap .dashboard-order.have-margin {
+        margin-bottom: 0;
+    }
+
+    .tiki-account .wrap .dashboard-order {
+        font-size: 13px;
+        background: #fff;
+        border-radius: 4px;
+    }
+        .tiki-account .wrap .dashboard-order table.table-responsive-2 {
+            width: 100%;
+            color: #424242;
+            display: table;
+        }
+</style>
+<div class="content-right">
+    <h1 class="have-margin">Đơn hàng của tôi</h1>
+
+    <div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+        <table class="timetable_sub">
+            <thead>
+                <tr>
+                    <th>Mã Đơn hàng </th>
+                    <th>Ngày mua</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Tổng Tiền</th>
+                    <th>Trạng Thái</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                var ten = "";
+                foreach (var i in item.TENSP)
+                {
+                    var x = db.LOAISP.Find(v => v.ID == i).TEN;
+                    ten = x + "; ";
+                }
+                <tr>
+                    <td class="invert">@item.ID</td>
+                    <td class="invert">@item.NGAYMUA</td>
+                    <td class="invert">@ten</td>
+                    <td class="invert">@item.TONGTIEN</td>
+                    <td class="invert">@item.TRANGTHAI</td>
+                </tr>
+
+            }
+        </table>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="clearfix"> </div>
+    <div class="checkout">
+
+    </div>
+</div>

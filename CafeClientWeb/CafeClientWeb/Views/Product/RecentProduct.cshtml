@@ -1,0 +1,59 @@
+﻿@using CafeClientWeb.DAO;
+@using CafeClientWeb.Models;
+@model List<HOMELOAISP>
+@{
+    string path = ConnectApi.path;
+}
+<!-- single-related-products -->
+<div class="single-related-products">
+    <div class="container">
+        <h3 class="animated wow slideInUp" data-wow-delay=".5s">Related Products</h3>
+        <p class="est animated wow slideInUp" data-wow-delay=".5s">
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+            deserunt mollit anim id est laborum.
+        </p>
+        <div class="new-collections-grids">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 new-collections-grid">
+                    <div class="new-collections-grid1 animated wow slideInLeft" data-wow-delay=".5s">
+                        <div class="new-collections-grid1-image">
+                            <a href="single.html" class="product-image"><img src=@path@item.ANH alt=" " class="img-responsive"></a>
+                            <div class="new-collections-grid1-image-pos">
+                                <a href="single.html">Quick View</a>
+                            </div>
+                            <div class="new-collections-grid1-right">
+                                <div class="rating">
+                                    <div class="rating-left">
+                                        <img src="images/2.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="images/2.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="images/1.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="images/1.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="images/1.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4><a href="single.html">@item.TEN</a></h4>
+                        <p>@Html.Raw(@item.MOTA)</p>
+                        <div class="new-collections-grid1-left simpleCart_shelfItem">
+                            <p><span class="item_price">@item.GIA</span><a class="item_add" href="#">Thêm vào giỏ</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //single-related-products -->

@@ -1,0 +1,90 @@
+﻿@using CafeClientWeb.Models;
+@using CafeClientWeb.DAO;
+@model List<CartItem>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string path = ConnectApi.path;
+}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>TRANGCHU</a></li>
+            <li class="active">GIỎ HÀNG</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- checkout -->
+<div class="checkout">
+    <div class="container">
+        <h3 class="animated wow slideInLeft" data-wow-delay=".5s">Giỏ hàng của bạn có: <span>@Model.Count</span></h3>
+        <div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>STT </th>
+                        <th>Hình Ảnh</th>
+                        <th>Số Lượng</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Giá Bán</th>
+                        <th>Thành Tiền</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                @{
+                    int i = 0;
+                    int? total = 0;
+                    
+                }
+                @foreach (var item in Model)
+                {
+                    i = i + 1;
+                    int? thanhtien = item.ProductModel.GIA * item.Quantity;
+                    total += thanhtien;
+
+                    <tr>
+                        <td class="invert">@i</td>
+                        <td class="invert-image"><a href="single.html"><img src=@path@item.ProductModel.ANH alt=" " class="img-responsive" /></a></td>
+                        <td class="invert">
+                            <div class="quantity">
+                                <div class="quantity-select">
+                                    <div class="entry value-minus" onclick="changequality(@i,'down',@item.ProductModel.ID)">&nbsp;</div>
+                                    <div class="entry value" id="quantity+@i"><span>@item.Quantity</span></div>
+                                    <div class="entry value-plus active" onclick="changequality(@i,'up',@item.ProductModel.ID)">&nbsp;</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="invert">@item.ProductModel.TEN</td>
+                        <td class="invert">@item.ProductModel.GIA</td>
+                        <td class="invert" id="thanhtien+@i">@thanhtien</td>
+                        <td class="invert">
+                            <div class="rem">
+                                <div class="close1 btnDelete" data-id="@item.ProductModel.ID"> </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            </table>
+        </div>
+        <div class="checkout-left">
+            <div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+                <h4><a href="/Cart/Payment"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Mua hàng</a></h4>
+                <ul>
+                    <li>Tổng tiền: <i>-</i> <span id="tongtien">@total</span></li>
+                </ul>
+            </div>
+            <div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+                <a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Tiếp tục mua sắm</a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //checkout -->
+
+@section Script2{
+    <script src="~/assets/js/CartController.js"></script>    
+
+}

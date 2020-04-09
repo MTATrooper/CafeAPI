@@ -1,0 +1,53 @@
+﻿@model CafeClientWeb.Models.User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Trang chủ</a></li>
+            <li class="active">Đăng Nhập</li>
+        </ol>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- login -->
+<div class="login">
+    <div class="container">
+        <div class="wrapper">
+            @if (TempData["Error"] != null)//kiểm tra thông báo để hiển thị
+            {
+                <div class="alert alert-error alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h3>Thất bại</h3>
+                    @TempData["Error"]
+                </div>
+            }
+            else if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h3>Thành công</h3>
+                    @TempData["Success"]
+                </div>
+
+            }
+        </div>
+        <h3 class="animated wow zoomIn" data-wow-delay=".5s">Đăng Nhập</h3>
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+            {
+                <input type="text" name="username" placeholder="Tên đăng nhập" required>
+                <input type="password" name="password" placeholder="Mật khẩu" required>
+                <div class="forgot">
+                    <a href="#">Quên mật khẩu</a>
+                </div>
+                <input type="submit" value="Login">
+            }
+        </div>
+        <h4 class="animated wow slideInUp" data-wow-delay=".5s">For New People</h4>
+        <p class="animated wow slideInUp" data-wow-delay=".5s"><a href="@Url.Action("Register","Home")">Đăng kí mới tại đây</a> hoặc trở về trang chủ <a href="@Url.Action("Index","Home")">Trang chủ<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
+    </div>
+</div>
+<!-- //login -->

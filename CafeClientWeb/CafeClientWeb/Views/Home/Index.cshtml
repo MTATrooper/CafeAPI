@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    figure.effect-julia {
+        background: #2f3238;
+        height: 413px;
+        width: 376px;
+    }
+</style>
+<!-- banner -->
+<div class="banner">
+    <div class="container">
+        <div class="banner-info animated wow zoomIn" data-wow-delay=".5s">
+            <h3>Cafe Latte Online Shopping</h3>
+            <h4>Giảm tới <span>50% <i>-</i></span></h4>
+            <div class="wmuSlider example1">
+                <div class="wmuSliderWrapper">
+                    <article style="position: absolute; width: 100%; opacity: 0;">
+                        <div class="banner-wrap">
+                            <div class="banner-info1">
+                                <p>T-Shirts + Formal Pants + Jewellery + Cosmetics</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article style="position: absolute; width: 100%; opacity: 0;">
+                        <div class="banner-wrap">
+                            <div class="banner-info1">
+                                <p>Toys + Furniture + Lighting + Watches</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article style="position: absolute; width: 100%; opacity: 0;">
+                        <div class="banner-wrap">
+                            <div class="banner-info1">
+                                <p>Tops + Books & Media + Sports</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <script src="~/assets/js/jquery.wmuSlider.js"></script>
+            <script>
+                $('.example1').wmuSlider();
+            </script>
+        </div>
+    </div>
+</div>
+<!-- //banner -->
+<!-- banner-bottom -->
+<div class="banner-bottom">
+    <div class="container">
+        <div class="banner-bottom-grids">
+            <div class="banner-bottom-grid-left animated wow slideInLeft" data-wow-delay=".5s">
+                <div class="grid">
+                    <figure class="effect-julia">
+                        <img src="https://cong-news.appwifi.com/wp-content/uploads/2019/05/11copy.jpg" alt=" " class="img-responsive" />
+                        <figcaption>
+                            <h3>Cafe <span>Latte</span><i> in online shopping</i></h3>
+                            <div>
+                                <p>Đảm bảo nguồn gốc</p>
+                                <p>Chất lượng uy tín</p>
+                                <p>Giá rẻ cạnh tranh</p>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="banner-bottom-grid-left1 animated wow slideInUp" data-wow-delay=".5s">
+                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
+                    <div class="banner-bottom-grid-left-grid1">
+                        <img src="https://cong-news.appwifi.com/wp-content/uploads/2019/05/SLL2cp.jpg" alt=" " class="img-responsive" />
+                    </div>
+                    <div class="banner-bottom-grid-left1-pos">
+                        <p>Giảm giá 5% cho những khách hàng đặt trên 10 sản phẩm</p>
+                    </div>
+                </div>
+                <div class="banner-bottom-grid-left-grid left1-grid grid-left-grid1">
+                    <div class="banner-bottom-grid-left-grid1">
+                        <img src="https://cong-news.appwifi.com/wp-content/uploads/2019/06/tuyen-Dung-2.jpg" alt=" " class="img-responsive" />
+                    </div>
+                    <div class="banner-bottom-grid-left1-position">
+                        <div class="banner-bottom-grid-left1-pos1">
+                            <p>Tuyển dụng nhân viên</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="banner-bottom-grid-right animated wow slideInRight" data-wow-delay=".5s">
+                <div class="banner-bottom-grid-left-grid grid-left-grid1">
+                    <div class="banner-bottom-grid-left-grid1">
+                        <img src="~/assets/images/3.jpg" alt=" " class="img-responsive" />
+                    </div>
+                    <div class="grid-left-grid1-pos">
+                        <p></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //banner-bottom -->
+<!-- collections -->
+
+@{Html.RenderAction("NewProduct", "Product"); }

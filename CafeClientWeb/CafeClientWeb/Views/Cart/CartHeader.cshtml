@@ -1,0 +1,21 @@
+﻿@using CafeClientWeb.Models;
+@using CafeClientWeb.DAO;
+@model List<CartItem>
+<div class="header-right">
+    <div class="cart box_1">
+        <a href="/Cart/">
+            <h3>
+                <div >
+                    <span>@(ViewBag.Total.ToString("N0") + " VND")</span>
+                </div>
+                <div>
+                    <img src="~/assets/images/bag.png" alt="" />
+                    <span> @ViewBag.SL </span> Sản phẩm
+                </div>
+                 
+            </h3>
+        </a>
+        @*<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>*@
+        <div class="clearfix"> </div>
+    </div>
+</div>
