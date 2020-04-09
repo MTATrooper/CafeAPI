@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor</title>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="ckeditor.js"></script>
+    <script src="adapters/jquery.js"></script>
+    <script>
+        //Khởi tạo Editor
+        CKEDITOR.disableAutoInline = true;
+
+        $(document).ready(function() {
+            $('#editor1').ckeditor({
+                enterMode: CKEDITOR.ENTER_BR,
+                shiftEnterMode: CKEDITOR.ENTER_P
+
+            });
+            CKEDITOR.on('instanceReady', function(evt) {
+                var editor = evt.editor;
+                editor.execCommand('maximize');
+            });
+
+        });
+        //Gán giá trị cho editor
+        function setValue(stringvalue) {
+            $('#editor1').val(stringvalue);
+        }
+        //Lấy giá trị từ editor
+        function getValue() {
+            return $('#editor1').val();
+        }
+    </script>
+</head>
+
+<body>
+
+
+    <textarea width="100%" id="editor1" name="editor1">
+<!--<p><strong>Apollo 11</strong> was the spaceflight that landed the first humans, Americans <a href="http://en.wikipedia.org/wiki/Neil_Armstrong" title="Neil Armstrong">Neil Armstrong</a> and <a href="http://en.wikipedia.org/wiki/Buzz_Aldrin" title="Buzz Aldrin">Buzz Aldrin</a>, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the lunar surface 6 hours later on July 21 at 02:56 UTC.</p>-->
+    </textarea>
+
+</body>
+
+</html>
