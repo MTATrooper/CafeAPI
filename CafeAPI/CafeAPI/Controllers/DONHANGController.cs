@@ -18,18 +18,18 @@ namespace CafeAPI.Controllers
     public class DONHANGController : ApiController
     {
         private CafeDbContext db = new CafeDbContext();
-
+        private DonHangDAO DH_DAO = new DonHangDAO();
         // GET: api/DONHANG
-        public IQueryable<DONHANG> GetDONHANG()
+        public IEnumerable<DONHANG> GetDONHANG()
         {
-            return db.DONHANG;
+            return DH_DAO.GetListDONHANG();
         }
 
         // GET: api/DONHANG/5
         [ResponseType(typeof(DONHANG))]
         public async Task<IHttpActionResult> GetDONHANG(int id)
         {
-            DONHANG dONHANG = await db.DONHANG.FindAsync(id);
+            DONHANG dONHANG = DH_DAO.GetDONHANG(id);
             if (dONHANG == null)
             {
                 return NotFound();
@@ -47,27 +47,13 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            //if (id != dONHANG.ID)
-            //{
-            //    return BadRequest();
-            //}
-
-            db.Entry(dONHANG).State = EntityState.Modified;
-
             try
             {
-                await db.SaveChangesAsync();
+                DH_DAO.UpdateTRANGTHAIDH(dONHANG.ID, dONHANG.TRANGTHAI_ID);
             }
             catch (DbUpdateConcurrencyException)
             {
-                //if (!DONHANGExists(id))
-                //{
-                //    return NotFound();
-                //}
-                //else
-                //{
-                //    throw;
-                //}
+                return NotFound();
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -129,16 +115,11 @@ namespace CafeAPI.Controllers
                 int[] idSP = new DonHangDAO().ConvertStringToArray(listIdSP);
                 int[] soluong = new DonHangDAO().ConvertStringToArray(listsoluong);
                 DONHANG dh = new DONHANG(nguoinhan, sdt, diachi, idKH);
-                db.DONHANG.Add(dh);
-                db.SaveChanges();
+                int idDH = DH_DAO.InsertDonHang(dh);
                 for (int i = 0; i < idSP.Length; i++)
                 {
                     CHITIETDONHANG CTDH = new CHITIETDONHANG(idSP[i], dh.ID, soluong[i], (int)new SANPHAM_DAO().GetPriceBySanPham(idSP[i]).GIABAN);
-                    db.CHITIETDONHANG.Add(CTDH);
-                    db.SaveChanges();
-                    dh.TONGTIEN += CTDH.SOLUONG * CTDH.DONGIA;
-                    db.Entry(dh).State = EntityState.Modified;
-                    db.SaveChanges();
+                    new ChiTietDH_DAO().InsertCHITIETDH(CTDH);
                 }
                 return Ok(1);
             }

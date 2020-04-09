@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CafeAPI.DAO;
 using CafeAPI.Models;
 
 namespace CafeAPI.Controllers
@@ -16,6 +17,7 @@ namespace CafeAPI.Controllers
     public class PRICEController : ApiController
     {
         private CafeDbContext db = new CafeDbContext();
+        private Price_DAO prDAO = new Price_DAO();
 
         // GET: api/PRICE
         public IQueryable<PRICE> GetPRICE()
@@ -45,13 +47,11 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-           
-
-            db.Entry(pRICE).State = EntityState.Modified;
-
+            //db.Entry(pRICE).State = EntityState.Modified;
             try
             {
-                await db.SaveChangesAsync();
+                prDAO.UpdatePrice(pRICE);
+                //await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,9 +69,9 @@ namespace CafeAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            db.PRICE.Add(pRICE);
-            await db.SaveChangesAsync();
+            prDAO.InsertPrice(pRICE);
+            //db.PRICE.Add(pRICE);
+            //await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = pRICE.ID }, pRICE);
         }

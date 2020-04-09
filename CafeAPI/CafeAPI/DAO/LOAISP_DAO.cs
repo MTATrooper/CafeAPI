@@ -23,7 +23,7 @@ namespace CafeAPI.DAO
         }
         public LOAISP GetLSPbyId(int id)
         {
-            string query = "select * from LOAISP where id = @id";
+            string query = "select * from dbo.getLOAISPbyID(@id)";
             string[] para = new string[1] { "@id" };
             object[] value = new object[1] { id };
             DataTable tb = cn.FillDataTable(query, CommandType.Text, para, value);
@@ -46,10 +46,10 @@ namespace CafeAPI.DAO
         }
         public void DeleteLOAISP(LOAISP lsp)
         {
-            string query = "delete LOAISP where ID=@id";
+            string query = "deleteLOAISP";
             string[] para = new string[1] { "@id" };
             object[] value = new object[1] { lsp.ID };
-            cn.Excute_Sql(query, CommandType.Text, para, value);
+            cn.Excute_Sql(query, CommandType.StoredProcedure, para, value);
         }
     }
 }

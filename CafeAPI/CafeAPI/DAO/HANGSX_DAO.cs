@@ -33,10 +33,10 @@ namespace CafeAPI.DAO
 
         public void InsertHANGSX(HANGSX hang)
         {
-            string query = "insert into HANGSX values(@ten)";
+            string query = "insertHSX";
             string[] para = new string[1] { "@ten" };
             object[] value = new object[1] { hang.TEN };
-            cn.Excute_Sql(query, CommandType.Text, para, value);
+            cn.Excute_Sql(query, CommandType.StoredProcedure, para, value);
         }
         public void UpdateHANGSX(HANGSX hang)
         {

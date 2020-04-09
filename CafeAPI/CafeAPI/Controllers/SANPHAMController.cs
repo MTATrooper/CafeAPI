@@ -58,11 +58,11 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Entry(sANPHAM).State = EntityState.Modified;
+            //db.Entry(sANPHAM).State = EntityState.Modified;
             try
             {
-                //spDAO.UpdateSANPHAM(sANPHAM);
-                await db.SaveChangesAsync();
+                spDAO.UpdateSANPHAM(sANPHAM);
+                //await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -81,9 +81,9 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            //spDAO.InsertSANPHAM(sANPHAM);
-            db.SANPHAM.Add(sANPHAM);
-            await db.SaveChangesAsync();
+            spDAO.InsertSANPHAM(sANPHAM);
+            //db.SANPHAM.Add(sANPHAM);
+            //await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = sANPHAM.ID }, sANPHAM);
         }

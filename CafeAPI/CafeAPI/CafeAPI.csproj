@@ -206,10 +206,13 @@
     <Compile Include="Controllers\TRANGTHAIDHController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\XUATHANGController.cs" />
+    <Compile Include="DAO\ChiTietDH_DAO.cs" />
     <Compile Include="DAO\Connection.cs" />
     <Compile Include="DAO\DonHangDAO.cs" />
     <Compile Include="DAO\HANGSX_DAO.cs" />
     <Compile Include="DAO\LOAISP_DAO.cs" />
+    <Compile Include="DAO\NHACUNGCAP_DAO.cs" />
+    <Compile Include="DAO\Price_DAO.cs" />
     <Compile Include="DAO\SANPHAM_DAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
