@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CafeAPI.Models;
+using CafeAPI.DAO;
 
 namespace CafeAPI.Controllers
 {
     public class NHACUNGCAPController : ApiController
     {
         private CafeDbContext db = new CafeDbContext();
+        private NHACUNGCAP_DAO nccDAO = new NHACUNGCAP_DAO();
 
         // GET: api/NHACUNGCAP
         public IQueryable<NHACUNGCAP> GetNHACUNGCAP()
@@ -69,8 +71,9 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.NHACUNGCAP.Add(nHACUNGCAP);
-            await db.SaveChangesAsync();
+            //db.NHACUNGCAP.Add(nHACUNGCAP);
+            //await db.SaveChangesAsync();
+            nccDAO.InsertNCC(nHACUNGCAP);
 
             return CreatedAtRoute("DefaultApi", new { id = nHACUNGCAP.ID }, nHACUNGCAP);
         }

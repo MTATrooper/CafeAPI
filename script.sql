@@ -75,14 +75,14 @@ create function getPriceBySanPham(@id int) returns table
 		where s.ID = @id and (p.BATDAU <= GETDATE() and p.KETTHUC >= GETDATE() or p.BATDAU <= GETDATE() and p.KETTHUC is null)
 GO
 --Thêm giá  cho sản phẩm mới
-Alter proc InsertPrice(@idSP int, @giaban int)
+Create proc InsertPrice(@idSP int, @giaban int)
 as
 begin
 	insert into PRICE values(@giaban, GETDATE(), NULL, @idSP)
 end
 GO
 --Update giá sản phẩm
-ALter proc UpdatePrice(@idSP int, @giaban int)
+Create proc UpdatePrice(@idSP int, @giaban int)
 as
 begin
 	declare @giacu int, @idPrice int
@@ -173,7 +173,7 @@ begin
 end
 GO
 --Update trạng thái đơn hàng
-Alter proc updateTrangThaiDH(@idDH int, @idTrangThaiMoi int)
+Create proc updateTrangThaiDH(@idDH int, @idTrangThaiMoi int)
 as
 begin
 	declare @idCTDH int

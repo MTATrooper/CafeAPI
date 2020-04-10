@@ -9,7 +9,7 @@ namespace CafeClientWeb.Models
 {
     public class ConnectApi
     {
-        public static string path = "http://192.168.8.104:9999/";
+        public static string path = "http://localhost:58638/";
         public ConnectApi() { }
         public T DeserializeObject<T>(string uri)
         {

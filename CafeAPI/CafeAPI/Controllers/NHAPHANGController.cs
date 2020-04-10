@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CafeAPI.Models;
+using CafeAPI.DAO;
 
 namespace CafeAPI.Controllers
 {
@@ -36,30 +37,6 @@ namespace CafeAPI.Controllers
             return Ok(nHAPHANG);
         }
 
-        // PUT: api/NHAPHANG/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutNHAPHANG(NHAPHANG nHAPHANG)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-          
-
-            db.Entry(nHAPHANG).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-               
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
 
         // POST: api/NHAPHANG
         [ResponseType(typeof(NHAPHANG))]
@@ -70,26 +47,10 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.NHAPHANG.Add(nHAPHANG);
-            await db.SaveChangesAsync();
+            int idNH = new NhapHangDAO().InsertNhapHang(nHAPHANG);
+            nHAPHANG.ID = idNH;
 
             return CreatedAtRoute("DefaultApi", new { id = nHAPHANG.ID }, nHAPHANG);
-        }
-
-        // DELETE: api/NHAPHANG/5
-        [ResponseType(typeof(NHAPHANG))]
-        public async Task<IHttpActionResult> DeleteNHAPHANG(int id)
-        {
-            NHAPHANG nHAPHANG = await db.NHAPHANG.FindAsync(id);
-            if (nHAPHANG == null)
-            {
-                return NotFound();
-            }
-
-            db.NHAPHANG.Remove(nHAPHANG);
-            await db.SaveChangesAsync();
-
-            return Ok(nHAPHANG);
         }
 
         protected override void Dispose(bool disposing)

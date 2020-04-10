@@ -42,5 +42,9 @@ namespace QuanCafeForm.DAO
         {
             return getListSANPHAM().Last();
         }
+        public string getUrlImage(string path)
+        {
+            return cnAPI.getUrl() + path;
+        }
     }
 }

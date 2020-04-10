@@ -146,6 +146,7 @@ namespace CafeClientWeb.Controllers
             order.DIACHI = shipAddress;
             order.SDT = shipPhone;
             order.TRANGTHAI_ID = 1;
+            order.TONGTIEN = 0;
             //insert order
 
             var id = new OrderDAO().Create(order);//trả về id của order
@@ -162,13 +163,13 @@ namespace CafeClientWeb.Controllers
                     orderDetail.DONHANG_ID = id;
                     orderDetail.DONGIA = price;
                     orderDetail.SOLUONG = item.Quantity;
-                    int ThanhTien = (int)(item.Quantity * price);
-                    total += ThanhTien;
+                    //int ThanhTien = (int)(item.Quantity * price);
+                    //total += ThanhTien;
 
                     model.Create(orderDetail);
                     Session[CartSession] = null;
                 }
-                new OrderDAO().EditTotal(total, id);               
+                //new OrderDAO().EditTotal(total, id);               
 
             }
             catch (Exception)
@@ -188,6 +189,7 @@ namespace CafeClientWeb.Controllers
             order.SDT = model.SDT;
             order.KHACHHANG_ID = model.ID;
             order.TRANGTHAI_ID = 1;
+            order.TONGTIEN = 0;
             //insert order
 
             var id = new OrderDAO().Create(order);//trả về id của order
@@ -204,13 +206,13 @@ namespace CafeClientWeb.Controllers
                     orderDetail.DONHANG_ID = id;
                     orderDetail.DONGIA = price;
                     orderDetail.SOLUONG = item.Quantity;
-                    int ThanhTien = (int)(item.Quantity * price);
-                    total += ThanhTien;
+                    //int ThanhTien = (int)(item.Quantity * price);
+                    //total += ThanhTien;
 
                     detail.Create(orderDetail);
                     Session[CartSession] = null;
                 }
-                new OrderDAO().EditTotal(total, id);
+                //new OrderDAO().EditTotal(total, id);
 
             }
             catch (Exception)

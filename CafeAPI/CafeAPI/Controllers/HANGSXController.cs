@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CafeAPI.Models;
+using CafeAPI.DAO;
 
 namespace CafeAPI.Controllers
 {
     public class HANGSXController : ApiController
     {
         private CafeDbContext db = new CafeDbContext();
+        private HANGSX_DAO hsxDAO = new HANGSX_DAO();
 
         // GET: api/HANGSX
         public IQueryable<HANGSX> GetHANGSX()
@@ -70,8 +72,9 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.HANGSX.Add(hANGSX);
-            await db.SaveChangesAsync();
+            //db.HANGSX.Add(hANGSX);
+            //await db.SaveChangesAsync();
+            hsxDAO.InsertHANGSX(hANGSX);
 
             return CreatedAtRoute("DefaultApi", new { id = hANGSX.ID }, hANGSX);
         }

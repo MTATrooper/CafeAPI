@@ -212,6 +212,7 @@
     <Compile Include="DAO\HANGSX_DAO.cs" />
     <Compile Include="DAO\LOAISP_DAO.cs" />
     <Compile Include="DAO\NHACUNGCAP_DAO.cs" />
+    <Compile Include="DAO\NhapHangDAO.cs" />
     <Compile Include="DAO\Price_DAO.cs" />
     <Compile Include="DAO\SANPHAM_DAO.cs" />
     <Compile Include="Global.asax.cs">

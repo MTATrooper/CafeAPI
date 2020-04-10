@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CafeAPI.DAO;
 using CafeAPI.Models;
 
 namespace CafeAPI.Controllers
@@ -36,31 +37,6 @@ namespace CafeAPI.Controllers
             return Ok(cHITIETNHAPHANG);
         }
 
-        // PUT: api/CHITIETNHAPHANG/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCHITIETNHAPHANG(CHITIETNHAPHANG cHITIETNHAPHANG)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            
-
-            db.Entry(cHITIETNHAPHANG).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
         // POST: api/CHITIETNHAPHANG
         [ResponseType(typeof(CHITIETNHAPHANG))]
         public async Task<IHttpActionResult> PostCHITIETNHAPHANG(CHITIETNHAPHANG cHITIETNHAPHANG)
@@ -70,26 +46,9 @@ namespace CafeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.CHITIETNHAPHANG.Add(cHITIETNHAPHANG);
-            await db.SaveChangesAsync();
+            new NhapHangDAO().InsertCTNhapHang(cHITIETNHAPHANG);
 
             return CreatedAtRoute("DefaultApi", new { id = cHITIETNHAPHANG.ID }, cHITIETNHAPHANG);
-        }
-
-        // DELETE: api/CHITIETNHAPHANG/5
-        [ResponseType(typeof(CHITIETNHAPHANG))]
-        public async Task<IHttpActionResult> DeleteCHITIETNHAPHANG(int id)
-        {
-            CHITIETNHAPHANG cHITIETNHAPHANG = await db.CHITIETNHAPHANG.FindAsync(id);
-            if (cHITIETNHAPHANG == null)
-            {
-                return NotFound();
-            }
-
-            db.CHITIETNHAPHANG.Remove(cHITIETNHAPHANG);
-            await db.SaveChangesAsync();
-
-            return Ok(cHITIETNHAPHANG);
         }
 
         protected override void Dispose(bool disposing)

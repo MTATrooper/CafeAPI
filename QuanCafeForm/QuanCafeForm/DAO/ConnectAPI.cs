@@ -28,7 +28,7 @@ namespace QuanCafeForm.DAO
             }
 
         }
-        public void Post<T>(string path,T sv)
+        public T Post<T>(string path,T sv)
         {
             using (var client = new HttpClient())
             {
@@ -39,9 +39,9 @@ namespace QuanCafeForm.DAO
                 //client.PostAsync("api/DONHANG/dathang?nguoinhan="+x+"&sdt="++"&diachi={diachi}&idKH={idKH}", null)
 
                 postTask.Wait();
-                //var kq = postTask.Result.Content.ReadAsStringAsync().Result;
-                //var data = JsonConvert.DeserializeObject<T>(kq);
-
+                var kq = postTask.Result.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<T>(kq);
+                return data;
             }
         }
 

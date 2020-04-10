@@ -32,8 +32,11 @@ namespace QuanCafeForm.GUI
             List<SANPHAM> lst = spDAO.getListSANPHAM();
             foreach (SANPHAM s in lst)
             {
-                string imagepath = @"E:\Projects\DEPLOY IIS\QuanCafeAPI IIS" + s.ANH;
-                s.image = Image.FromFile(imagepath);
+                //string imagepath = @"E:\Projects\DEPLOY IIS\QuanCafeAPI IIS" + s.ANH;
+                //s.image = Image.FromFile(imagepath);
+                PictureBox p = new PictureBox();
+                p.Load(spDAO.getUrlImage(s.ANH));
+                s.image = p.Image;
                 s.price = spDAO.getPrice(s.ID);
             }
             grCtrlSP.DataSource = lst;
@@ -60,9 +63,12 @@ namespace QuanCafeForm.GUI
             cbBLSP.SelectedValue = sp.LOAISP_ID;
             spKL.Value = sp.KHOILUONG;
             txtGia.Text = spDAO.getPrice(sp.ID).ToString();
-            string imagepath = @"E:\Projects\DEPLOY IIS\QuanCafeAPI IIS" + sp.ANH;
-            picAnh.Image = Image.FromFile(imagepath);
-            picAnh.ImageLocation = imagepath;
+            //string imagepath = @"E:\Projects\DEPLOY IIS\QuanCafeAPI IIS" + sp.ANH;
+            PictureBox p = new PictureBox();
+            p.Load(spDAO.getUrlImage(sp.ANH));
+            picAnh.Image = p.Image;
+            //picAnh.Image = Image.FromFile(imagepath);
+            //picAnh.ImageLocation = imagepath;
             webMota.Document.InvokeScript("setValue", new[] { sp.MOTA });
         }
 

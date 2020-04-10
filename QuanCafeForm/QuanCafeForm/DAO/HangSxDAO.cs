@@ -15,5 +15,9 @@ namespace QuanCafeForm.DAO
             List<HANGSX> lst = cnAPI.GetObject<List<HANGSX>>("api/HANGSX/");
             return lst;
         }
+        public void InsertHSX(HANGSX h)
+        {
+            cnAPI.Post<HANGSX>("api/HANGSX/", h);
+        }
     }
 }

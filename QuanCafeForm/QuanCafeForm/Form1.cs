@@ -15,6 +15,7 @@ namespace QuanCafeForm
         ucLoaiSP ucLSP;
         ucSANPHAM ucSP;
         ucHOADON ucHD;
+        ucNHAPHANG ucNH;
         public frmMain()
         {
             InitializeComponent();
@@ -59,6 +60,17 @@ namespace QuanCafeForm
             }
             ucHD.Dock = DockStyle.Fill;
             ucHD.BringToFront();
+        }
+
+        private void barNhapHang_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ucNH = new ucNHAPHANG();
+            if (!pnmain.Controls.Contains(ucNH))
+            {
+                pnmain.Controls.Add(ucNH);
+            }
+            ucNH.Dock = DockStyle.Fill;
+            ucNH.BringToFront();
         }
     }
 }

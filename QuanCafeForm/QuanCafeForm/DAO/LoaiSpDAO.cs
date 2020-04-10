@@ -20,6 +20,11 @@ namespace QuanCafeForm.DAO
             LOAISP lst = cnAPI.GetObject<LOAISP>("api/LOAISP/" + id);
             return lst;
         }
+        public List<LOAISP> getLOAISPByHSX(int idHSX)
+        {
+            List<LOAISP> allLSP = getListLOAISP();
+            return allLSP.Where(x => x.HANGSX_ID == idHSX).ToList();
+        }
         public void updateLOAISP(LOAISP lsp)
         {
             cnAPI.Put<LOAISP>("api/LOAISP", lsp);

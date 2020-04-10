@@ -81,9 +81,9 @@ namespace QuanCafeForm.GUI
                 xh.GIANHAP = l.GIANHAP;
                 xh.GIABAN = CTDH.DONGIA;
                 xhDAO.insertXUATHANG(xh);
-                CHITIETNHAPHANG ctnh = new NhapHangDAO().GetCTNHbyId(xh.NHAPHANG_ID);
-                ctnh.SOLUONGCONLAI = ctnh.SOLUONGNHAP - xh.SOLUONGXUAT;
-                new NhapHangDAO().updateNHAPHANG(ctnh);
+                //CHITIETNHAPHANG ctnh = new NhapHangDAO().GetCTNHbyId(xh.NHAPHANG_ID);
+                //ctnh.SOLUONGCONLAI = ctnh.SOLUONGNHAP - xh.SOLUONGXUAT;
+                //new NhapHangDAO().updateNHAPHANG(ctnh);
             }
             MessageBox.Show("Xong!");
         }
