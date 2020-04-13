@@ -43,29 +43,21 @@ namespace CafeAPI.DAO
         }
         public int InsertDonHang(DONHANG dh)
         {
-            cn.Conn.Open();
-            using (SqlTransaction tran = cn.Conn.BeginTransaction())
+            try
             {
-                try
-                {
-                    string query = "insertDonHang";
-                    string[] para = new string[4] { "@nguoinhan", "@sdt", "@diachi", "@idKH" };
-                    object[] value = new object[4] { dh.TENNGUOINHAN, dh.SDT, dh.DIACHI, dh.KHACHHANG_ID };
-                    Excute_Sql(cn.Conn, query, CommandType.StoredProcedure, para, value);
-                    query = "select dbo.getNewIdDonHang()";
-                    DataTable tb = cn.LoadTable(query);
-                    int id = Convert.ToInt32(tb.Rows[0][0]);
+                string query = "insertDonHang";
+                string[] para = new string[4] { "@nguoinhan", "@sdt", "@diachi", "@idKH" };
+                object[] value = new object[4] { dh.TENNGUOINHAN, dh.SDT, dh.DIACHI, dh.KHACHHANG_ID };
+                cn.Excute_Sql(query, CommandType.StoredProcedure, para, value);
+                query = "select dbo.getNewIdDonHang()";
+                DataTable tb = cn.LoadTable(query);
+                int id = Convert.ToInt32(tb.Rows[0][0]);
              
-                    tran.Commit();
-                    cn.Conn.Close();
-                    return id;
-                }
-                catch
-                {
-                    tran.Rollback();
-                    cn.Conn.Close();
-                    throw;
-                }
+                return id;
+            }
+            catch
+            {
+                throw;
             }
         }
         public void UpdateTRANGTHAIDH(int idDH, int? trang_thai_moi)
@@ -74,29 +66,6 @@ namespace CafeAPI.DAO
             string[] para = new string[2] { "@idDH", "@idTrangThaiMoi" };
             object[] value = new object[2] { idDH, trang_thai_moi };
             cn.Excute_Sql(query, CommandType.StoredProcedure, para, value);
-        }
-        public int Excute_Sql(SqlConnection Conn, string strQuery, CommandType cmdtype, string[] para, object[] values)
-        {
-            int efftectRecord = 0;
-            SqlCommand sqlcmd = new SqlCommand();
-            sqlcmd.CommandText = strQuery;
-            sqlcmd.Connection = Conn;
-            sqlcmd.CommandType = cmdtype;
-            SqlParameter sqlpara;
-            for (int i = 0; i < para.Length; i++)
-            {
-                sqlpara = new SqlParameter(para[i], values[i]);
-                sqlcmd.Parameters.Add(sqlpara);
-            }
-            try
-            {
-                efftectRecord = sqlcmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show("Error:" + ex.Message);
-            }
-            return efftectRecord;
         }
     }
 }

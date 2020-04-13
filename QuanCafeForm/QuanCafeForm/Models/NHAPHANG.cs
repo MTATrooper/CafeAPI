@@ -16,6 +16,7 @@ namespace QuanCafeForm.Models
         public DateTime NGAYNHAP { get; set; }
 
         public int NHACC_ID { get; set; }
+        public int TONGTIEN { get; set; }
 
         //public virtual ICollection<CHITIETNHAPHANG> CHITIETNHAPHANG { get; set; }
 

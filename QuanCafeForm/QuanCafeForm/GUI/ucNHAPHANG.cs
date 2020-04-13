@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanCafeForm.Models;
 using QuanCafeForm.DAO;
+using System.IO;
+using System.Diagnostics;
 
 namespace QuanCafeForm.GUI
 {
@@ -20,6 +22,7 @@ namespace QuanCafeForm.GUI
         private SanphamDAO spDAO = new SanphamDAO();
         private NhapHangDAO nhDAO = new NhapHangDAO();
         private List<TEMP> lstTemp = new List<TEMP>();
+        private int idNewNH = 0;
         public ucNHAPHANG()
         {
             InitializeComponent();
@@ -158,12 +161,12 @@ namespace QuanCafeForm.GUI
         {
             NHAPHANG nh = new NHAPHANG();
             nh.NHACC_ID = (int)cbBNhap_NCC.SelectedValue;
-            int idNh = nhDAO.InsertNhapHang(nh).ID;
+            idNewNH = nhDAO.InsertNhapHang(nh).ID;
             foreach (TEMP tmp in lstTemp)
             {
                 CHITIETNHAPHANG ct = new CHITIETNHAPHANG();
                 ct.SANPHAM_ID = tmp.IDSP;
-                ct.NHAPHANG_ID = idNh;
+                ct.NHAPHANG_ID = idNewNH;
                 ct.SOLUONGNHAP = tmp.SOLUONGNHAP;
                 ct.GIANHAP = tmp.GIANHAP;
                 nhDAO.InsertChiTietNhapHang(ct);
@@ -173,6 +176,8 @@ namespace QuanCafeForm.GUI
             spinNhapGIANHAP.Value = 0;
             spinNhapSL.Value = 0;
             MessageBox.Show("Nhập thành công!");
+            //gridCtrLSNH.DataSource = null;
+            gridCtrLSNH.DataSource = nhDAO.getListNhapHang();
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
@@ -180,6 +185,60 @@ namespace QuanCafeForm.GUI
             spinNhapGIANHAP.Value = 0;
             spinNhapSL.Value = 0;
             lstTemp = new List<TEMP>();
+        }
+
+        private void btnInHoaDon_Click(object sender, EventArgs e)
+        {
+            string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string template = dir + @"\Template\NhapKho.docx";
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ngay");
+            dt.Columns.Add("thang");
+            dt.Columns.Add("nam");
+            dt.Columns.Add("ID");
+            dt.Columns.Add("NHACUNGCAP");
+            dt.Columns.Add("Tongtien");
+            NHAPHANG nh = nhDAO.getNhapHangById(idNewNH);
+            NHACUNGCAP ncc = nccDAO.getListNCC().FirstOrDefault(x => x.ID == nh.NHACC_ID);
+            dt.Rows.Add(new Object[]
+            {
+                DateTime.Now.Day,
+                DateTime.Now.Month,
+                DateTime.Now.Year,
+                nh.ID,
+                ncc.TEN,
+                String.Format("{0:0,0}", nh.TONGTIEN)
+            });
+            dt.TableName = "phieu";
+
+            List<InFoCTNhapHang> lstCTNH = nhDAO.getListCTNhapHangByIdNH(idNewNH);
+            DataTable dt2 = new DataTable();
+            dt2.Columns.Add("SANPHAM");
+            dt2.Columns.Add("HANGSX");
+            dt2.Columns.Add("KHOILUONG");
+            dt2.Columns.Add("SOLUONG");
+            dt2.Columns.Add("GIANHAP");
+            foreach( InFoCTNhapHang o in lstCTNH)
+            {
+                dt2.Rows.Add(new Object[]
+                {
+                    o.SANPHAM,
+                    o.HANGSX,
+                    o.KHOILUONG,
+                    o.SOLUONGNHAP,
+                    String.Format("{0:0,0}", o.GIANHAP)
+                });
+            }
+            dt2.TableName = "chitiet";
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt);
+            ds.Tables.Add(dt2);
+            Aspose.Words.Document doc = new Aspose.Words.Document(template);
+            doc.MailMerge.ExecuteWithRegions(ds);
+            string filePath = dir + String.Format("/NhapKho_{0}.pdf", DateTime.Now.Day + "_" + DateTime.Now.Month + "_" +
+                DateTime.Now.Year);
+            doc.Save(filePath, Aspose.Words.SaveFormat.Pdf);
+            Process.Start(filePath);
         }
     }
     class TEMP

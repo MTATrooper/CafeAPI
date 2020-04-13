@@ -97,10 +97,10 @@ begin
 end
 GO
 ---Nhập hàng----
-create proc insertNhaphang (@idNCC int)
+Alter proc insertNhaphang (@idNCC int)
 as
 begin
-	insert into NHAPHANG values(GETDATE(), @idNCC )
+	insert into NHAPHANG values(GETDATE(), @idNCC, 0 )
 end
 GO
 --Lấy ID Nhập hàng vừa mới thêm
@@ -310,3 +310,17 @@ begin
 	where ID = @idDH
 end
 GO
+--Update tổng tiền nhập kho
+create trigger Insert_UpdateTongtienNH on CHITIETNHAPHANG for insert
+as
+begin
+	declare @idNH int, @soluong int, @gianhap int
+	select @idNH = NHAPHANG_ID, @soluong = SOLUONGNHAP, @gianhap = GIANHAP from inserted
+	update NHAPHANG
+	set TONGTIEN = TONGTIEN + @soluong*@gianhap
+	where ID = @idNH
+end
+GO
+--Alter table NHAPHANG add TONGTIEN int
+--update NHAPHANG
+--set TONGTIEN = (select sum(SOLUONGNHAP*GIANHAP) from CHITIETNHAPHANG where NHAPHANG_ID = NHAPHANG.ID group by NHAPHANG_ID)

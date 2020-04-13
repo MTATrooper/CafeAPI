@@ -85,10 +85,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2019 14:53:01</publishTime>
     </File>
     <File Include="bin/CafeAPI.dll">
-      <publishTime>04/09/2020 22:44:57</publishTime>
+      <publishTime>04/11/2020 14:18:34</publishTime>
     </File>
     <File Include="bin/CafeAPI.pdb">
-      <publishTime>04/09/2020 22:44:57</publishTime>
+      <publishTime>04/11/2020 14:18:34</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/08/2018 02:03:48</publishTime>

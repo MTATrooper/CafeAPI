@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using QuanCafeForm.DAO;
 using QuanCafeForm.Models;
 using DevExpress.XtraEditors.Repository;
+using System.IO;
+using System.Diagnostics;
 
 namespace QuanCafeForm.GUI
 {
@@ -149,13 +151,47 @@ namespace QuanCafeForm.GUI
                 SANPHAM s = new SanphamDAO().getSanphamById(c.SANPHAM_ID);
                 THONGTINCHITIETDH t = new THONGTINCHITIETDH(c, s);
                 t2.ID = t.ID; t2.KHOILUONG = t.KHOILUONG;
-                t2.SOLUONG = t.SOLUONG; t2.DONGIA = t.DONGIA;
-                t2.THANHTIEN = t.THANHTIEN;
+                t2.SOLUONG = t.SOLUONG; t2.DONGIA = String.Format("{0:0,0}", t.DONGIA);
+                t2.THANHTIEN = String.Format("{0:0,0}", t.THANHTIEN);
                 t2.TEN = new LoaiSpDAO().getLOAISPById(t.LOAISP).TEN;
                 lstTTCT.Add(t2);
             }
-            FormPrint formPrint = new FormPrint(lstTTCT, dh);
-            formPrint.ShowDialog();
+            //FormPrint formPrint = new FormPrint(lstTTCT, dh);
+            //formPrint.ShowDialog();
+            string dir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string template = dir + @"\Template\DonHang.docx";
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ngay");
+            dt.Columns.Add("thang");
+            dt.Columns.Add("nam");
+            dt.Columns.Add("NGUOINHAN");
+            dt.Columns.Add("SDT");
+            dt.Columns.Add("DIACHI");
+            dt.Columns.Add("NGAYDAT");
+            dt.Columns.Add("TONGTIEN");
+            dt.Rows.Add(new Object[]
+            {
+                DateTime.Now.Day,
+                DateTime.Now.Month,
+                DateTime.Now.Year,
+                dh.TENNGUOINHAN,
+                dh.SDT,
+                dh.DIACHI,
+                String.Format("{0:dd-MM-yyyy}", dh.NGAYDAT),
+                String.Format("{0:0,0}", dh.TONGTIEN)
+            });
+            dt.TableName = "donhang";
+            DataTable dt2 = new ConnectAPI().ConvertToDataTable<THONGTINCHITIETDH2>(lstTTCT);
+            dt2.TableName = "chitiet";
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt);
+            ds.Tables.Add(dt2);
+            Aspose.Words.Document doc = new Aspose.Words.Document(template);
+            doc.MailMerge.ExecuteWithRegions(ds);
+            string filePath = dir + String.Format("/DonHang_{0}_{1}.pdf", dh.TENNGUOINHAN,
+                DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year);
+            doc.Save(filePath, Aspose.Words.SaveFormat.Pdf);
+            Process.Start(filePath);
         }
     }
 }

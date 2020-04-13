@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Reflection;
+using System.ComponentModel;
 
 namespace CafeAPI.DAO
 {
@@ -32,12 +33,20 @@ namespace CafeAPI.DAO
 
         public DataTable LoadTable(string sql)
         {
-            this.Conn.Open();
-            SqlDataAdapter da = new SqlDataAdapter(sql, Conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            this.Conn.Close();
-            return dt;
+            try
+            {
+                this.Conn.Open();
+                SqlDataAdapter da = new SqlDataAdapter(sql, Conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                this.Conn.Close();
+                return dt;
+            }
+            catch
+            {
+                this.Conn.Close();
+                throw;
+            }
         }
         
         public bool Execute(string query)
@@ -180,6 +189,22 @@ namespace CafeAPI.DAO
             {
                 return obj;
             }
+        }
+        public DataTable ConvertToDataTable<T>(IList<T> data)
+        {
+            PropertyDescriptorCollection properties =
+                TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (T item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
         }
     }
 }

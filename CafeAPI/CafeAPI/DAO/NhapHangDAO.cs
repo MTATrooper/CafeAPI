@@ -23,28 +23,20 @@ namespace CafeAPI.DAO
         }
         public int InsertNhapHang(NHAPHANG nh)
         {
-            cn.Conn.Open();
-            using(SqlTransaction tran = cn.Conn.BeginTransaction())
+            try
             {
-                try
-                {
-                    string query = "insertNhaphang";
-                    string[] para = new string[1] { "@idNCC" };
-                    object[] value = new object[1] { nh.NHACC_ID };
-                    cn.Excute_Sql(query, CommandType.StoredProcedure, para, value);
-                    query = "select dbo.getNewIdNhapHang()";
-                    DataTable tb = cn.LoadTable(query);
-                    int id = Convert.ToInt32(tb.Rows[0][0]);
-                    cn.Conn.Close();
-                    tran.Commit();
-                    return id;
-                }
-                catch(Exception ex)
-                {
-                    cn.Conn.Close();
-                    tran.Rollback();
-                    throw;
-                }
+                string query = "insertNhaphang";
+                string[] para = new string[1] { "@idNCC" };
+                object[] value = new object[1] { nh.NHACC_ID };
+                cn.Excute_Sql(query, CommandType.StoredProcedure, para, value);
+                query = "select dbo.getNewIdNhapHang()";
+                DataTable tb = cn.LoadTable(query);
+                int id = Convert.ToInt32(tb.Rows[0][0]);
+                return id;
+            }
+            catch(Exception ex)
+            {
+                throw;
             }
             
         }

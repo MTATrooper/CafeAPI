@@ -22,6 +22,7 @@ namespace CafeAPI.Models
         public DateTime? NGAYNHAP { get; set; }
 
         public int? NHACC_ID { get; set; }
+        public int TONGTIEN { get; set; }
 
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         //public virtual ICollection<CHITIETNHAPHANG> CHITIETNHAPHANG { get; set; }

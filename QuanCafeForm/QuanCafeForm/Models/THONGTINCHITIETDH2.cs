@@ -12,7 +12,7 @@ namespace QuanCafeForm.Models
         public string TEN { get; set; }
         public int KHOILUONG { get; set; }
         public int SOLUONG { get; set; }
-        public int DONGIA { get; set; }
-        public int THANHTIEN { get; set; }
+        public string DONGIA { get; set; }
+        public string THANHTIEN { get; set; }
     }
 }
