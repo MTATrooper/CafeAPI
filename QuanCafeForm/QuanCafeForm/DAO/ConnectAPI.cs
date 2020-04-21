@@ -47,6 +47,20 @@ namespace QuanCafeForm.DAO
             }
         }
 
+        public T1 PostObject<T1, T2>(string path, T2 item)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(url);
+
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<T2>(path, item);
+                postTask.Wait();
+                var kq = postTask.Result.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<T1>(kq);
+                return data;
+            }
+        }
         public void PostAsync(string uri)
         {
             using (var client = new HttpClient())

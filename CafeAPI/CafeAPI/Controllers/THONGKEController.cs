@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CafeAPI.Models;
+using CafeAPI.DAO;
 
 namespace CafeAPI.Controllers
 {
+    [RoutePrefix("api/THONGKE")]
     public class THONGKEController : ApiController
     {
         private CafeDbContext db = new CafeDbContext();
@@ -74,6 +76,37 @@ namespace CafeAPI.Controllers
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = tHONGKE.ID }, tHONGKE);
+        }
+
+        // POST: api/THONGKE/GetThongKe
+        [HttpPost]
+        [Route("GetThongKe")]
+        //[ResponseType(typeof(List<THONGKE>))]
+        public async Task<IHttpActionResult> GetThongKe(ThongKeDate tkDate)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            ThongKe_DAO tk_DAO = new ThongKe_DAO();
+            List<THONGKE> results = tk_DAO.getThongKe(tkDate);
+            //return CreatedAtRoute("DefaultApi", new { id = 1 }, results);
+            return Ok(results);
+        }
+        // POST: api/THONGKE/GetSanPhamBanChay
+        [HttpPost]
+        [Route("GetSanPhamBanChay")]
+        //[ResponseType(typeof(List<THONGKE>))]
+        public async Task<IHttpActionResult> GetSanPhamBanChay(ThongKeDate tkDate)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            ThongKe_DAO tk_DAO = new ThongKe_DAO();
+            List<SanPhamBanChay> results = tk_DAO.getSanPhamBanChay(tkDate);
+            //return CreatedAtRoute("DefaultApi", new { id = 1 }, results);
+            return Ok(results);
         }
 
         // DELETE: api/THONGKE/5

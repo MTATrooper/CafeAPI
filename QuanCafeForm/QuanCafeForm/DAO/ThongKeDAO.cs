@@ -46,6 +46,15 @@ namespace QuanCafeForm.DAO
                 return true;
             return false;
         }
-        
+        public List<THONGKE> getThongKe(ThongKeDate tkDate)
+        {
+            List<THONGKE> lst = cn.PostObject<List<THONGKE>, ThongKeDate>("api/THONGKE/GetThongKe", tkDate);
+            return lst;
+        }
+        public List<SanPhamBanChay> getSanPhamBanChay(ThongKeDate tkDate)
+        {
+            List<SanPhamBanChay> lst = cn.PostObject<List<SanPhamBanChay>, ThongKeDate>("api/THONGKE/GetSanPhamBanChay", tkDate);
+            return lst;
+        }
     }
 }

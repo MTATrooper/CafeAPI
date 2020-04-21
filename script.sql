@@ -44,7 +44,7 @@ begin
 end
 GO
 --Update thông tin sản phẩm
-create proc updateSANPHAM (@id int, @khoiluong int, @anh nvarchar(200), @mota ntext, @soluong int, @idloaisp int)
+alter proc updateSANPHAM (@id int, @khoiluong int, @anh nvarchar(200), @mota ntext, @soluong int, @idloaisp int)
 as
 begin
 	update SANPHAM 
@@ -251,7 +251,29 @@ begin
 		end
 end
 GO
+--lấy giá bán của sản phẩm hiện tại
+CREATE function [dbo].[getThongKe](@fromYear int, @fromMonth int, @toYear int, @toMonth int) returns table
+	return select * from THONGKE where THONGKE.NGAY >= CONCAT(@fromYear,'-',@fromMonth,'-','01') and THONGKE.NGAY <= CONCAT(@toYear,'-',@toMonth,'-','01')
+GO
+--lấy giá bán của sản phẩm hiện tại
+CREATE function [dbo].[getSanPhamBanChay](@fromYear int, @fromMonth int, @toYear int, @toMonth int) returns table
+	return	select top 100 count(distinct(dh.ID)) as SoLuongHoaDon, sum(ctdh.SOLUONG) as SoLuongBan, lsp.TEN as TenSP, sp.KHOILUONG as KhoiLuong
+			from DONHANG as dh, CHITIETDONHANG as ctdh, SANPHAM as sp, LOAISP as lsp
+			where dh.ID = ctdh.DONHANG_ID and sp.ID = ctdh.SANPHAM_ID and lsp.ID = sp.LOAISP_ID and dh.TRANGTHAI_ID < 4
+				  and dh.NGAYDAT >= CONCAT(@fromYear,'-',@fromMonth,'-','01') and dh.NGAYDAT <= CONCAT(@toYear,'-',@toMonth,'-','01')
+			group by TEN, KHOILUONG
+			order by SoLuongBan desc, TEN asc, KHOILUONG asc
+GO
 --////////////////////////////////////////////TRIGGER//////////////////////////////
+--thêm giá mặc định cho sản phẩm mới
+create trigger insertDefaultPrice on SANPHAM for insert
+as
+begin
+	declare @idSP int
+	select @idSP = ID from inserted
+	exec InsertPrice @idSP, 0
+end
+GO
 --Update lại số lượng sản phẩm khi nhập lô mới
 create trigger updateSoLuongSP on CHITIETNHAPHANG for insert
 as

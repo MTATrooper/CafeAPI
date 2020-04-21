@@ -210,11 +210,13 @@
     <Compile Include="DAO\Connection.cs" />
     <Compile Include="DAO\DonHangDAO.cs" />
     <Compile Include="DAO\HANGSX_DAO.cs" />
+    <Compile Include="DAO\HangSX_SAO.cs" />
     <Compile Include="DAO\LOAISP_DAO.cs" />
     <Compile Include="DAO\NHACUNGCAP_DAO.cs" />
     <Compile Include="DAO\NhapHangDAO.cs" />
     <Compile Include="DAO\Price_DAO.cs" />
     <Compile Include="DAO\SANPHAM_DAO.cs" />
+    <Compile Include="DAO\ThongKe_DAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,7 +233,9 @@
     <Compile Include="Models\NHAPHANG.cs" />
     <Compile Include="Models\PRICE.cs" />
     <Compile Include="Models\SANPHAM.cs" />
+    <Compile Include="Models\SanPhamBanChay.cs" />
     <Compile Include="Models\THONGKE.cs" />
+    <Compile Include="Models\ThongKeDate.cs" />
     <Compile Include="Models\TRANGTHAIDH.cs" />
     <Compile Include="Models\XUATHANG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

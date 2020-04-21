@@ -63,12 +63,12 @@ namespace QuanCafeForm.GUI
             cbBLSP.SelectedValue = sp.LOAISP_ID;
             spKL.Value = sp.KHOILUONG;
             txtGia.Text = spDAO.getPrice(sp.ID).ToString();
-            //string imagepath = @"E:\Projects\DEPLOY IIS\QuanCafeAPI IIS" + sp.ANH;
+            string imagepath = @"E:\Projects\DEPLOY IIS\QuanCafeAPI IIS" + sp.ANH;
             PictureBox p = new PictureBox();
             p.Load(spDAO.getUrlImage(sp.ANH));
             picAnh.Image = p.Image;
             //picAnh.Image = Image.FromFile(imagepath);
-            //picAnh.ImageLocation = imagepath;
+            picAnh.ImageLocation = imagepath;
             webMota.Document.InvokeScript("setValue", new[] { sp.MOTA });
         }
 

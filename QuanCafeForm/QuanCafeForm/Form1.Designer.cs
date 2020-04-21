@@ -36,7 +36,7 @@
             this.barHoadon = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
+            this.barThongKe = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -61,7 +61,7 @@
             this.barHoadon,
             this.barButtonItem6,
             this.barButtonItem8,
-            this.barButtonItem9,
+            this.barThongKe,
             this.barButtonItem10});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.MaxItemId = 12;
@@ -70,7 +70,7 @@
             this.ribbonPage1,
             this.ribbonPage2});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
-            this.ribbonControl1.Size = new System.Drawing.Size(967, 143);
+            this.ribbonControl1.Size = new System.Drawing.Size(959, 147);
             // 
             // barLSP
             // 
@@ -130,14 +130,15 @@
             this.barButtonItem8.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             // 
-            // barButtonItem9
+            // barThongKe
             // 
-            this.barButtonItem9.Caption = "Doanh thu";
-            this.barButtonItem9.Id = 10;
-            this.barButtonItem9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
-            this.barButtonItem9.Name = "barButtonItem9";
-            this.barButtonItem9.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            this.barThongKe.Caption = "Doanh thu";
+            this.barThongKe.Id = 10;
+            this.barThongKe.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barThongKe.ImageOptions.Image")));
+            this.barThongKe.Name = "barThongKe";
+            this.barThongKe.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
+            this.barThongKe.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barThongKe_ItemClick);
             // 
             // barButtonItem10
             // 
@@ -192,7 +193,7 @@
             // 
             // ribbonPageGroup6
             // 
-            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem9);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barThongKe);
             this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem10);
             this.ribbonPageGroup6.Name = "ribbonPageGroup6";
             this.ribbonPageGroup6.Text = "Thống kê";
@@ -200,9 +201,9 @@
             // pnmain
             // 
             this.pnmain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnmain.Location = new System.Drawing.Point(0, 143);
+            this.pnmain.Location = new System.Drawing.Point(0, 147);
             this.pnmain.Name = "pnmain";
-            this.pnmain.Size = new System.Drawing.Size(967, 404);
+            this.pnmain.Size = new System.Drawing.Size(959, 396);
             this.pnmain.TabIndex = 1;
             // 
             // frmMain
@@ -210,7 +211,7 @@
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(967, 547);
+            this.ClientSize = new System.Drawing.Size(959, 543);
             this.Controls.Add(this.pnmain);
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -239,7 +240,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private DevExpress.XtraBars.BarButtonItem barThongKe;
         private DevExpress.XtraBars.BarButtonItem barButtonItem10;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
